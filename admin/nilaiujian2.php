@@ -11,12 +11,14 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
         $id_kelas = $_GET['kelas'];
         $sqlkelas = " and a.id_kelas ='" . $_GET['kelas'] . "'";
     }
+    $sql = "SELECT * FROM mapel";
     if (empty($_GET['id'])) {
         $id_mapel = "";
     } else {
         $id_mapel = $_GET['id'];
+        $sql = "SELECT * FROM mapel where id_mapel=' $id_mapel '";
     }
-    $mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel where id_mapel='$id_mapel' "));
+    $mapel = mysqli_fetch_array(mysqli_query($koneksi, $sql));
     // $kelas = unserialize($mapel['kelas']);
     // $id_mapel = $mapel['id_mapel'];
     // $kelas = implode("','", $kelas);
