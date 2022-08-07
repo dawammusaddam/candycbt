@@ -11,14 +11,12 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
         $id_kelas = $_GET['kelas'];
         $sqlkelas = " and a.id_kelas ='" . $_GET['kelas'] . "'";
     }
-    $sql = "SELECT * FROM mapel";
     if (empty($_GET['id'])) {
         $id_mapel = "";
     } else {
         $id_mapel = $_GET['id'];
-        $sql = "SELECT * FROM mapel where id_mapel=' $id_mapel '";
     }
-    $mapel = mysqli_fetch_array(mysqli_query($koneksi, $sql));
+    $mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel where id_mapel='$id_mapel' "));
     // $kelas = unserialize($mapel['kelas']);
     // $id_mapel = $mapel['id_mapel'];
     // $kelas = implode("','", $kelas);
@@ -37,7 +35,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
         <div class='col-md-12'>
             <div class='box box-solid'>
                 <div class='box-header with-border'>
-                    <h3 class='box-title'> NILAI <? $mapel['nama'] ?></h3>
+                    <h3 class='box-title'> NILAI <?= $mapel['nama'] ?></h3>
                     <div class='box-tools pull-right btn-grou'>
                         <button class='btn btn-sm btn-primary' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button>
                         <iframe name='frameresult' src='report.php?m=<?= $id_mapel ?>&k=<?= $id_kelas ?>' style='display:none'></iframe>
