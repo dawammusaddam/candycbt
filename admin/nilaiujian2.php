@@ -35,7 +35,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
         <div class='col-md-12'>
             <div class='box box-solid'>
                 <div class='box-header with-border'>
-                    <h3 class='box-title'> NILAI <?= $mapel['nama'] ?></h3>
+                    <h3 class='box-title'> NILAI <? $mapel['nama'] ?></h3>
                     <div class='box-tools pull-right btn-grou'>
                         <button class='btn btn-sm btn-primary' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button>
                         <iframe name='frameresult' src='report.php?m=<?= $id_mapel ?>&k=<?= $id_kelas ?>' style='display:none'></iframe>
