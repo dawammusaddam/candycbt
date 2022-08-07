@@ -1245,7 +1245,7 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 				<?php elseif ($pg == 'materi') : ?>
 					<?php include 'materi/materi.php'; ?>
 				<?php elseif ($pg == 'nilaiujian') : ?>
-					<?php include 'nilaiujian2.php'; ?>
+					<?php include 'nilaiujian3.php'; ?>
 				<?php elseif ($pg == 'nilai') : ?>
 					<?php include 'nilai.php'; ?>
 				<?php elseif ($pg == 'semuanilai') : ?>
