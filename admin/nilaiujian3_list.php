@@ -1,7 +1,6 @@
 <?php
 defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!');
 ?>
-<?php if ($ac == '') : ?>
     <?php
 
     if (empty($_GET['kelas'])) {
@@ -11,37 +10,19 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
         $id_kelas = $_GET['kelas'];
         $sqlkelas = " and a.id_kelas ='" . $_GET['kelas'] . "'";
     }
-    // $_GET['id'] = 1;
     if (empty($_GET['id'])) {
         $id_mapel = "";
-        $qmapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel"));
-        // echo json_encode($qmapel);
-        $_GET['id'] = $qmapel['id_mapel'];
-        $id_mapel = $_GET['id'];
-
     } else {
         $id_mapel = $_GET['id'];
     }
     $mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel where id_mapel='$id_mapel' "));
-    // $kelas = unserialize($mapel['kelas']);
-    // $id_mapel = $mapel['id_mapel'];
-    // $kelas = implode("','", $kelas);
-    // $sqlkelas = "";
-    // if (!$kelas == 'semua') {
-    //     $sqlkelas = " and a.id_kelas in ('" . $kelas . "')";
-    // }
-
-    // $level = $mapel['level'];
-    // $sqllevel = "";
-    // if (!$level == 'semua') {
-    //     $sqlkelas = "and a.level='" . $level . "'";
-    // }
     ?>
-    <div class='row'>
+
+<div class='row'>
         <div class='col-md-12'>
             <div class='box box-solid'>
                 <div class='box-header with-border'>
-                    <h3 class='box-title'> NILAI <?= $mapel['kode'] ?></h3>
+                    <h3 class='box-title'> NILAI <?= $mapel['nama'] ?></h3>
                     <div class='box-tools pull-right btn-grou'>
                         <button class='btn btn-sm btn-primary' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button>
                         <iframe name='frameresult' src='report.php?m=<?= $id_mapel ?>&k=<?= $id_kelas ?>' style='display:none'></iframe>
@@ -54,15 +35,13 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                         <!-- mryes -->
                         <div class="col-md-3">
 
+                            <select class="form-control select2 kelas">
+                                <option value=''> Pilih Kelas</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
                             <select class="form-control select2 ujian">
-                                <?php $kelas = mysqli_query($koneksi, "SELECT * FROM mapel"); ?>
-                                <option value=''> Pilih Daftar Soal</option>
-                                <?php while ($kls = mysqli_fetch_array($kelas)) : ?>
-                                    <option <?php if ($id_mapel == $kls['id_mapel']) {
-                                                echo "selected";
-                                            } else {
-                                            } ?> value="<?= $kls['id_mapel'] ?>"><?= $kls['kode'] ?></option>
-                                <?php endwhile; ?>
+                                <option> Pilih Mata Pelajaran</option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -72,7 +51,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 $('#cari_nilai').click(function() {
                                     var kelas = $('.kelas').val();
                                     var ujian = $('.ujian').val();
-                                    location.replace("?pg=nilaiujian&&id=" + ujian);
+                                    location.replace("?pg=nilaiujian&kelas=" + kelas + "&id=" + ujian);
                                 }); //ke url
                             </script>
 
@@ -234,175 +213,6 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
             </div><!-- /.box -->
         </div>
     </div>
-
-<?php elseif ($ac == 'jawaban') : ?>
-    <?php
-    $idmapel = $_GET['id'];
-
-    $id_siswa = $_GET['ids'];
-    $nilai = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai WHERE id_siswa='$id_siswa' and id_mapel='$idmapel'"));
-    $mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel where id_mapel='$idmapel'"));
-    $siswa = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM siswa WHERE id_siswa='$id_siswa'"));
-    ?>
-    <div class='row'>
-        <div class='col-md-12'>
-            <div class='box box-solid'>
-                <div class='box-header with-border '>
-                    <h3 class='box-title'>Data Hasil Ujian</h3>
-                    <div class='box-tools pull-right btn-group'>
-                        <!-- <button class='btn btn-sm btn-primary' onclick="frames['framejawab'].print()"><i class='fa fa-print'></i> Print</button> -->
-                        <!-- <i class='btn btn-sm btn-danger' href='?pg=nilai&ac=lihat&id=<?= $idmapel ?>'><i class='fa fa-times'></i></a> -->
-                        <!-- <iframe name='framejawab' src='printjawab.php?m=<?= $idmapel ?>&s=<?= $id_siswa ?>' style='display:none;'></iframe> -->
-                    </div>
-                </div><!-- /.box-header -->
-                <div class='box-body'>
-                    <table class='table table-bordered table-striped'>
-                        <tr>
-                            <th width='150'>No Induk</th>
-                            <td width='10'>:</td>
-                            <td><?= $siswa['nis'] ?></td>
-                            <td style="text-align:center; width:150">Nilai PG</td>
-                            <td style="text-align:center; width:150">Nilai Esai</td>
-                            <td style="text-align:center; width:150">Total Nilai</td>
-                        </tr>
-                        <tr>
-                            <th>Nama</th>
-                            <td width='10'>:</td>
-                            <td><?= $siswa['nama'] ?></td>
-                            <td rowspan='3' style='font-size:30px; text-align:center; width:150'><?= $nilai['skor'] ?></td>
-                            <td rowspan='3' style='font-size:30px; text-align:center; width:150'><?= $nilai['nilai_esai'] ?></td>
-                            <td rowspan='3' style='font-size:30px; color:blue; text-align:center; width:150'><?= $nilai['total'] ?></td>
-                        </tr>
-                        <tr>
-                            <th>Kelas</th>
-                            <td width='10'>:</td>
-                            <td><?= $siswa['id_kelas'] ?></td>
-                        </tr>
-                        <tr>
-                            <th>Mata Pelajaran</th>
-                            <td width='10'>:</td>
-                            <td><?= $mapel['kode'] ?></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <div class='table-responsive'>
-                        <table class='table table-bordered table-striped'>
-                            <thead>
-                                <tr>
-                                    <th width='5px'>#</th>
-                                    <th>Soal PG</th>
-                                    <th style='text-align:center'>Jawab</th>
-                                    <th style='text-align:center'>Hasil</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $jawaban = unserialize($nilai['jawaban']); ?>
-                                <?php foreach ($jawaban as $key => $value) : ?>
-                                    <?php
-                                    $no++;
-                                    $soal = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM soal WHERE id_soal='$key'"));
-                                    if ($value == $soal['jawaban']) :
-                                        $status = "<span class='text-green'><i class='fa fa-check'></i></span>";
-                                    else :
-                                        $status = "<span class='text-red'><i class='fa fa-times'></i></span>";
-                                    endif;
-                                    ?>
-                                    <tr>
-                                        <td><?= $no ?></td>
-                                        <td><?= $soal['soal'] ?></td>
-                                        <td style='text-align:center'><?= $value ?></td>
-                                        <td style='text-align:center'><?= $status ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                        <?php if ($nilai['jawaban_esai'] <> null) { ?>
-                            <table class='table table-bordered table-striped'>
-                                <thead>
-                                    <tr>
-                                        <th width='5px'>#</th>
-                                        <th>Soal ESAI</th>
-                                        <th style='text-align:center'>Jawab</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $noX = 0;
-                                    $jawabanesai = unserialize($nilai['jawaban_esai']); ?>
-
-                                    <?php foreach ($jawabanesai as $key2 => $value2) : ?>
-                                        <?php
-                                        $noX++;
-                                        $soal = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM soal WHERE id_soal='$key2'"));
-
-                                        ?>
-                                        <tr>
-                                            <td><?= $noX ?></td>
-                                            <td><?= $soal['soal'] ?></td>
-                                            <td><?= $value2 ?></td>
-
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        <?php } ?>
-                        <br>
-                        <!-- <table class='table table-bordered table-striped'>
-							<thead>
-								<tr>
-									<th width='5px'>#</th>
-									<th>Soal Esai</th>
-									<th style='text-align:center'>Hasil</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php $nilaiex = mysqli_query($koneksi, "SELECT * FROM hasil_jawaban WHERE id_siswa='$id_siswa' and id_mapel='$idmapel' and jenis='2' and id_ujian='$nilai[id_ujian]' ");
-                                $nox = 0; ?>
-								<?php while ($jawabane = mysqli_fetch_array($nilaiex)) : ?>
-									<?php
-                                    $soal = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM soal WHERE id_soal='$jawabane[id_soal]'"));
-                                    $nox++;
-                                    ?>
-									<tr>
-										<td><?= $nox ?></td>
-										<td><?= $soal['soal'] ?>
-											<p><b>jawab : </b><?= $jawabane['esai'] ?></p>
-										</td>
-										<td style='text-align:center'><?= $jawabane['nilai_esai'] ?></td>
-									</tr>
-								<?php endwhile; ?>
-							</tbody>
-						</table> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
 <script>
     $('#tablenilaix').dataTable();
-    $(document).on('click', '.ulangnilai', function() {
-        var id = $(this).data('id');
-        console.log(id);
-        swal({
-            title: 'Apa anda yakin?',
-            text: " Akan Mengulang Ujian Ini ??",
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: 'ulangujian.php',
-                    method: "POST",
-                    data: 'id=' + id,
-                    success: function(data) {
-                        toastr.success("berhasil diulang");
-                        $('#tablenilai').load(location.href + ' #tablenilai');
-                    }
-                });
-            }
-        })
-    });
 </script>
