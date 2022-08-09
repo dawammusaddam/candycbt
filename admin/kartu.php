@@ -94,7 +94,7 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
 								<?php
 									if ($siswa['foto'] <> '') {
 										if (!file_exists("../foto/fotosiswa/$siswa[foto]")) {
-											echo "<img src='$homeurl/dist/img/avatar_default.png' class='img'  style='max-width:60px' alt='+'>";
+											echo "<img src='$homeurl/dist/img/avatar5.png' class='img'  style='max-width:60px' alt='+'>";
 										} else {
 											echo "<img src='$homeurl/foto/fotosiswa/$siswa[foto]' class='img'  style='max-width:60px' >";
 										}

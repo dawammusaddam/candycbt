@@ -125,12 +125,12 @@ $tglsekarang = time();
                                 <?php
                                 if ($siswa['foto'] <> '') :
                                     if (!file_exists("foto/fotosiswa/$siswa[foto]")) :
-                                        echo "<img src='$homeurl/dist/img/avatar_default.png' class='user-image'   alt='+'>";
+                                        echo "<img src='$homeurl/dist/img/avatar5.png' class='user-image'   alt='+'>";
                                     else :
                                         echo "<img src='$homeurl/foto/fotosiswa/$siswa[foto]' class='user-image'   alt='+'>";
                                     endif;
                                 else :
-                                    echo "<img src='$homeurl/dist/img/avatar_default.png' class='user-image'   alt='+'>";
+                                    echo "<img src='$homeurl/dist/img/avatar5.png' class='user-image'   alt='+'>";
                                 endif;
                                 ?>
                                 <span class='hidden-xs'><?= $siswa['nama'] ?> &nbsp; <i class='fa fa-caret-down'></i></span>
@@ -140,12 +140,12 @@ $tglsekarang = time();
                                     <?php
                                     if ($siswa['foto'] <> '') :
                                         if (!file_exists("foto/fotosiswa/$siswa[foto]")) :
-                                            echo "<img src='$homeurl/dist/img/avatar_default.png' class='img-circle' alt='User Image'>";
+                                            echo "<img src='$homeurl/dist/img/avatar5.png' class='img-circle' alt='User Image'>";
                                         else :
                                             echo "<img src='$homeurl/foto/fotosiswa/$siswa[foto]' class='img-circle' alt='User Image'>";
                                         endif;
                                     else :
-                                        echo "<img src='$homeurl/dist/img/avatar_default.png' class='img-circle' alt='User Image'>";
+                                        echo "<img src='$homeurl/dist/img/avatar5.png' class='img-circle' alt='User Image'>";
                                     endif;
                                     ?>
                                     <p>
@@ -171,12 +171,12 @@ $tglsekarang = time();
                         <?php
                         if ($siswa['foto'] <> '') :
                             if (!file_exists("foto/fotosiswa/$siswa[foto]")) :
-                                echo "<img src='$homeurl/dist/img/avatar_default.png' class='img'  style='max-width:60px' alt='+'>";
+                                echo "<img src='$homeurl/dist/img/avatar5.png' class='img'  style='max-width:60px' alt='+'>";
                             else :
                                 echo "<img src='$homeurl/foto/fotosiswa/$siswa[foto]' class='img'  style='max-width:60px' alt='+'>";
                             endif;
                         else :
-                            echo "<img src='$homeurl/dist/img/avatar_default.png' class='img'  style='max-width:60px' alt='+'>";
+                            echo "<img src='$homeurl/dist/img/avatar5.png' class='img'  style='max-width:60px' alt='+'>";
                         endif;
                         ?>
                     </div>
@@ -190,7 +190,6 @@ $tglsekarang = time();
                         ?>
                         <p title="<?= $siswa['nama'] ?>"><?= $nama ?></p>
                         <p><a href='#'><i class='fa fa-circle text-green'></i> online</a>
-                        <p><span class="badge bg-red"><?=$siswa['idpk']?></span> <span class="badge bg-green"><?=$siswa['id_kelas']?></span></p>
                     </div>
                 </div><br>
                 <hr style="margin:0px">
@@ -202,7 +201,7 @@ $tglsekarang = time();
                     <li><a href='<?= $homeurl ?>/tugassiswa'><i class='fas fa-edit fa-fw  '></i> <span> Tugas Siswa</span></a></li>
                     
                     <li><a href='<?= $homeurl ?>/hasil'><i class='fas fa-tags fa-fw '></i> <span> Hasil Ujian</span></a></li>
-                     <li><a href='brocandycbt.apk'><i class='fas fa-fw  fa-star'></i> <span>Exambro</span></a></li>
+                     <!-- <li><a href='brocandycbt.apk'><i class='fas fa-fw  fa-star'></i> <span>Exambro</span></a></li> -->
                 </ul><!-- /.sidebar-menu -->
             </section>
         </aside>
