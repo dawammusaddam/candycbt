@@ -15,6 +15,7 @@ if ($pengawas['level'] == 'admin') {
 } else {
     $nilaiq = mysqli_query($koneksi, "SELECT *  FROM nilai  s LEFT JOIN ujian c ON s.id_ujian=c.id_ujian  where c.status='1' and s.id_siswa<>'' and c.id_guru='$_SESSION[id_pengawas]' GROUP by s.id_nilai DESC");
 }
+// var_dump($nilaiq);
 while ($nilai = mysqli_fetch_array($nilaiq)) {
     $tglx = strtotime($nilai['ujian_mulai']);
     $tgl = date('Y-m-d', $tglx);

@@ -1,3 +1,4 @@
 
 *.png
 admin/backup_soal/
+config/config.database.php

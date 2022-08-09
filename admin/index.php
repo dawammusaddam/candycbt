@@ -265,14 +265,14 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 							</li>
 						<?php endif ?>
 						<li class='treeview'><a href='?pg=siswa'><i class="fas fa-user-friends side-menu-icon fa-fw   "></i> <span>Peserta Ujian</span></a></li>
-						<li class='treeview'>
+						<!-- <li class='treeview'>
 							<a href='#'><i class="fas fa-edit side-menu-icon fa-fw"></i><span> E-Learning </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=materi'><i class='fas fa-angle-double-right fa-fw'></i> <span> Materi</span></a></li>
 								<li><a href='?pg=tugas'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Tugas Terstruktur</span></a></li>
 
 							</ul>
-						</li>
+						</li> -->
 						<!-- <li><a href='?pg=banksoal'><i class="fas fa-envelope-open-text side-menu-icon  fa-fw"></i> <span> Bank Soal</span></a></li> -->
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-envelope-open-text side-menu-icon fa-fw"></i><span> Bank Soal </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
