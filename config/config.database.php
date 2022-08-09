@@ -1,7 +1,7 @@
 <?php
 //konfigurasi server database
 $host = 'localhost';
-$user = 'kmds';
+$user = 'root';
 $pass = 'password';
 $debe = 'ecandy28r3';
 
