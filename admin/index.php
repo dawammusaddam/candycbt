@@ -451,20 +451,16 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 									<!-- /.box-header -->
 									<div class="box-body">
 										<div id='infoweb'></div>
-										<p><b>POSKO CANDY</b></p>
+										<p><b>Kemendesa</b></p>
 
 										<ul class="list-group">
 											<li class="list-group-item"><img src="../dist/img/support.png" width="45" alt="">
-												<a href="http://candycbt.id" target="_blank" class="btn btn-success">
+												<a href="https://kemendesa.go.id" target="_blank" class="btn btn-success">
 													<i class="fas fa-globe    "></i> Our Website
 												</a></li>
 											<li class="list-group-item"><img src="../dist/img/support.png" width="45" alt="">
-												<a href="https://t.me/joinchat/F8fX-xHSUuvhjNbdy-kX7g" target="_blank" class="btn btn-primary">
-													<i class="fab fa-telegram-plane"></i> Join Telegram
-												</a></li>
-											<li class="list-group-item"><img src="../dist/img/support.png" width="45" alt="">
-												<a href="https://www.youtube.com/channel/UCWwotNPs4H7sW8t_g8yb1sg" target="_blank" class="btn btn-danger">
-													<i class="fab fa-youtube"></i> Video Tutorial
+												<a href="https://rekrutmenp3pd.kemendesa.go.id/" target="_blank" class="btn btn-primary">
+													<i class="fab fa-telegram-plane"></i> P3PD
 												</a></li>
 										</ul>
 										<!-- <div class="col-lg-6">
