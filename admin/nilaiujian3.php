@@ -43,12 +43,16 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
         $wilayah_id = $_GET['wilayah_id'];
         if($jabatan == 'PLD'){
             $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kelurahan_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id, kec.id AS kec_id, kel.id AS kel_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id JOIN wilayahs kec ON kab.id = kec.parent_id JOIN wilayahs kel ON kec.id = kel.parent_id WHERE kel.id=" . $wilayah_id));
         }else if($jabatan == 'PD'){
             $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kecamatan_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id, kec.id AS kec_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id JOIN wilayahs kec ON kab.id = kec.parent_id WHERE kec.id=" . $wilayah_id));
         }else if($jabatan == 'TAKAB'){
             $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kabupaten_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id WHERE kab.id=" . $wilayah_id));
         }else if($jabatan == 'TAPROV'){
             $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.provinsi_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id FROM wilayahs prov WHERE prov.id=" . $wilayah_id));
         }
     }
     ?>
@@ -82,33 +86,36 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                         </div>
                         <div class="col-md-3">
                             <select id="select-jabatan" class="form-control select2 ">
-                                <option value=''> Pilih Jabatan</option>
-                                <option value='PLD'> Pendamping Lokal Desa</option>
-                                <option value='PD'> Pendamping Desa</option>
-                                <option value='TAKAB'> TA Kabupaten</option>
-                                <option value='TAPROV'> TA Provinsi</option>
+                                <option value='' <?php echo ($jabatan == '' ? 'selected' : '')?>> Pilih Jabatan</option>
+                                <option value='PLD' <?php echo ($jabatan == 'PLD' ? 'selected' : '')?>> Pendamping Lokal Desa</option>
+                                <option value='PD' <?php echo ($jabatan == 'PD' ? 'selected' : '')?>> Pendamping Desa</option>
+                                <option value='TAKAB' <?php echo ($jabatan == 'TAKAB' ? 'selected' : '')?>> TA Kabupaten</option>
+                                <option value='TAPROV' <?php echo ($jabatan == 'TAPROV' ? 'selected' : '')?>> TA Provinsi</option>
                             </select>
                         </div>
                         <!-- mryes -->
                     </div>
                     <div class="row">
-
-                    <div class="col-md-2">
+                        <div class="col-md-2">
+                            <input type="hidden" id="input-prov" value="<?= $selected_wilayah['prov_id']?>">
                             <select id="select-prov" class="form-control select2">
                                 <option value=''> Pilih Provinsi</option>
                             </select>
                         </div>
                         <div class="col-md-2">
+                            <input type="hidden" id="input-kab" value="<?= $selected_wilayah['kab_id']?>">
                             <select id="select-kab" class="form-control select2">
                                 <option value=''> Pilih Kabupaten</option>
                             </select>
                         </div>
                         <div class="col-md-2">
+                            <input type="hidden" id="input-kec" value="<?= $selected_wilayah['kec_id']?>">
                             <select id="select-kec" class="form-control select2">
                                 <option value=''> Pilih Kecamatan</option>
                             </select>
                         </div>
                         <div class="col-md-2">
+                            <input type="hidden" id="input-kel" value="<?= $selected_wilayah['kel_id']?>">
                             <select id="select-kel" class="form-control select2 ">
                                 <option value=''> Pilih Kelurahan</option>
                             </select>
@@ -466,8 +473,10 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 
     $(document).ready(function(){
 
-var a = <?php $_GET['jabatan']; ?>
-console.log('data a', a);
+        var prov_id = $('#input-prov').val();
+        var kab_id = $('#input-kab').val();
+        var kec_id = $('#input-kec').val();
+        var kel_id = $('#input-kel').val();
 
         function optionBuilder(label, data){
             var html = '<option value=""> ' + label + ' </option>';
@@ -485,6 +494,7 @@ console.log('data a', a);
             success: function(res){
                 var html = optionBuilder('Pilih Provinsi', res);
                 $('#select-prov').html(html);
+                $("#select-prov").val(prov_id).change();
 
                 html = '<option value=""> Pilih Kabupaten </option>';$('#select-kab').html(html);
                 html = '<option value=""> Pilih Kecamatan </option>';$('#select-kec').html(html);
@@ -502,6 +512,7 @@ console.log('data a', a);
                 success: function(res){
                     var html = optionBuilder('Pilih Kabupaten', res);
                     $('#select-kab').html(html);
+                    $("#select-kab").val(kab_id).change();
 
                     html = '<option value=""> Pilih Kecamatan </option>';$('#select-kec').html(html);
                     html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
@@ -519,6 +530,7 @@ console.log('data a', a);
                 success: function(res){
                     var html = optionBuilder('Pilih Kecamatan', res);
                     $('#select-kec').html(html);
+                    $("#select-kec").val(kec_id).change();
 
                     html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
                 }
@@ -535,6 +547,7 @@ console.log('data a', a);
                 success: function(res){
                     var html = optionBuilder('Pilih Kelurahan', res);
                     $('#select-kel').html(html);
+                    $("#select-kel").val(kel_id).change();
                 }
             });
         });
