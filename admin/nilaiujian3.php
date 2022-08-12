@@ -36,6 +36,21 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
     // if (!$level == 'semua') {
     //     $sqlkelas = "and a.level='" . $level . "'";
     // }
+
+    $sqljabatanregion = '';
+    if(!empty($_GET['jabatan'])){
+        $jabatan = $_GET['jabatan'];
+        $wilayah_id = $_GET['wilayah_id'];
+        if($jabatan == 'PLD'){
+            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kelurahan_id=' . $wilayah_id;
+        }else if($jabatan == 'PD'){
+            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kecamatan_id=' . $wilayah_id;
+        }else if($jabatan == 'TAKAB'){
+            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kabupaten_id=' . $wilayah_id;
+        }else if($jabatan == 'TAPROV'){
+            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.provinsi_id=' . $wilayah_id;
+        }
+    }
     ?>
     <div class='row'>
         <div class='col-md-12'>
@@ -45,7 +60,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                     <div class='box-tools pull-right btn-grou'>
                         <button class='btn btn-sm btn-primary' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button>
                         <iframe name='frameresult' src='report.php?m=<?= $id_mapel ?>&k=<?= $id_kelas ?>' style='display:none'></iframe>
-                        <a class='btn btn-sm btn-success' href='report_excel.php?m=<?= $id_mapel ?>'><i class='fa fa-download'></i> Download Excel</a>
+                        <a class='btn btn-sm btn-success' href='report_excel.php?m=<?= $id_mapel ?>&jabatan=<?= $jabatan ?>&wilayah_id=<?= $wilayah_id ?>'><i class='fa fa-download'></i> Download Excel</a>
                         <a class='btn btn-sm btn-danger' href='?pg=jadwal'><i class='fa fa-times'></i></a>
                     </div>
                 </div><!-- /.box-header -->
@@ -56,7 +71,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 
                             <select class="form-control select2 ujian">
                                 <?php $kelas = mysqli_query($koneksi, "SELECT * FROM mapel"); ?>
-                                <option value=''> Pilih Daftar Soal</option>
+                                <option value=''> Pilih Daftar Ujian</option>
                                 <?php while ($kls = mysqli_fetch_array($kelas)) : ?>
                                     <option <?php if ($id_mapel == $kls['id_mapel']) {
                                                 echo "selected";
@@ -66,19 +81,62 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                             </select>
                         </div>
                         <div class="col-md-3">
+                            <select id="select-jabatan" class="form-control select2 ">
+                                <option value=''> Pilih Jabatan</option>
+                                <option value='PLD'> Pendamping Lokal Desa</option>
+                                <option value='PD'> Pendamping Desa</option>
+                                <option value='TAKAB'> TA Kabupaten</option>
+                                <option value='TAPROV'> TA Provinsi</option>
+                            </select>
+                        </div>
+                        <!-- mryes -->
+                    </div>
+                    <div class="row">
+
+                    <div class="col-md-2">
+                            <select id="select-prov" class="form-control select2">
+                                <option value=''> Pilih Provinsi</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="select-kab" class="form-control select2">
+                                <option value=''> Pilih Kabupaten</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="select-kec" class="form-control select2">
+                                <option value=''> Pilih Kecamatan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="select-kel" class="form-control select2 ">
+                                <option value=''> Pilih Kelurahan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
 
                             <button id="cari_nilai" class="btn btn-primary">Cari Nilai</button>
                             <script type="text/javascript">
                                 $('#cari_nilai').click(function() {
-                                    var kelas = $('.kelas').val();
+                                    var select_jabatan = $('#select-jabatan').val();
+                                    var wilayah_id = '';
+                                    if(select_jabatan == 'PLD'){
+                                        wilayah_id = $('#select-kel').val();
+                                    }else if(select_jabatan == 'PD'){
+                                        wilayah_id = $('#select-kec').val();
+                                    }else if(select_jabatan == 'TAKAB'){
+                                        wilayah_id = $('#select-kab').val();
+                                    }else if(select_jabatan == 'TAPROV'){
+                                        wilayah_id = $('#select-prov').val();
+                                    }
                                     var ujian = $('.ujian').val();
-                                    location.replace("?pg=nilaiujian&&id=" + ujian);
+                                    location.replace("?pg=nilaiujian&id=" + ujian + "&jabatan=" + select_jabatan + "&wilayah_id=" + wilayah_id);
                                 }); //ke url
                             </script>
 
                         </div>
-                        <!-- mryes -->
                     </div>
+                    <hr>
                     <div id="tablenilai" class='table-responsive'>
                         <table id="tablenilaix" class='table table-bordered table-striped'>
                             <thead>
@@ -96,7 +154,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $siswaQ = mysqli_query($koneksi, "SELECT * FROM siswa a join nilai b on a.id_siswa=b.id_siswa where b.id_mapel='$id_mapel'" . $sqlkelas); ?>
+                                <?php $siswaQ = mysqli_query($koneksi, "SELECT * FROM siswa a join nilai b on a.id_siswa=b.id_siswa where b.id_mapel='$id_mapel'" . $sqlkelas . $sqljabatanregion); ?>
                                 <?php while ($siswa = mysqli_fetch_array($siswaQ)) : ?>
                                     <?php
                                     $no++;
@@ -404,5 +462,83 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                 });
             }
         })
+    });
+
+    $(document).ready(function(){
+
+var a = <?php $_GET['jabatan']; ?>
+console.log('data a', a);
+
+        function optionBuilder(label, data){
+            var html = '<option value=""> ' + label + ' </option>';
+            $.each(data, function( index, value ) {
+                html += '<option value="' + value.id + '"> ' + value.nama + ' </option>';
+            });
+            return html;
+        }
+        //
+        $.ajax({
+            url: 'wilayah.php?level=provinsi',
+            method: 'POST',
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(res){
+                var html = optionBuilder('Pilih Provinsi', res);
+                $('#select-prov').html(html);
+
+                html = '<option value=""> Pilih Kabupaten </option>';$('#select-kab').html(html);
+                html = '<option value=""> Pilih Kecamatan </option>';$('#select-kec').html(html);
+                html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
+            }
+        });
+        
+        $('#select-prov').on('change', function(e){
+            var val = e.target.value;
+            $.ajax({
+                url: 'wilayah.php?level=kabupaten&parent_id=' + val,
+                method: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(res){
+                    var html = optionBuilder('Pilih Kabupaten', res);
+                    $('#select-kab').html(html);
+
+                    html = '<option value=""> Pilih Kecamatan </option>';$('#select-kec').html(html);
+                    html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
+                }
+            });
+        });
+        
+        $('#select-kab').on('change', function(e){
+            var val = e.target.value;
+            $.ajax({
+                url: 'wilayah.php?level=kecamatan&parent_id=' + val,
+                method: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(res){
+                    var html = optionBuilder('Pilih Kecamatan', res);
+                    $('#select-kec').html(html);
+
+                    html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
+                }
+            });
+        });
+
+        $('#select-kec').on('change', function(e){
+            var val = e.target.value;
+            $.ajax({
+                url: 'wilayah.php?level=kelurahan&parent_id=' + val,
+                method: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(res){
+                    var html = optionBuilder('Pilih Kelurahan', res);
+                    $('#select-kel').html(html);
+                }
+            });
+        });
+
+
     });
 </script>

@@ -15,6 +15,21 @@ if (date('m') >= 7 and date('m') <= 12) {
 } elseif (date('m') >= 1 and date('m') <= 6) {
 	$ajaran = (date('Y') - 1) . "/" . date('Y');
 }
+
+$sqljabatanregion = "";
+if(!empty($_GET['jabatan'])){
+	$jabatan = $_GET['jabatan'];
+	$wilayah_id = $_GET['wilayah_id'];
+	if($jabatan == 'PLD'){
+		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.kelurahan_id=" . $wilayah_id;
+	}else if($jabatan == 'PD'){
+		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.kecamatan_id=" . $wilayah_id;
+	}else if($jabatan == 'TAKAB'){
+		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.kabupaten_id=" . $wilayah_id;
+	}else if($jabatan == 'TAPROV'){
+		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.provinsi_id=" . $wilayah_id;
+	}
+}
 $file = "NILAI_" . $mapel['tgl_ujian'] . "_" . $mapel['nama'];
 $file = str_replace(" ", "-", $file);
 $file = str_replace(":", "", $file);
@@ -59,8 +74,7 @@ Jumlah Soal: <?= $mapel['jml_soal'] ?> PG / <?= $mapel['jml_esai'] ?> ESAI<br />
 	</tr>
 
 	<?php
-
-	$siswaQ = mysqli_query($koneksi, "SELECT * FROM siswa a join nilai b ON a.id_siswa=b.id_siswa where b.id_mapel='$id_ujian' ORDER BY id_kelas ASC");
+	$siswaQ = mysqli_query($koneksi, "SELECT * FROM siswa a join nilai b ON a.id_siswa=b.id_siswa where b.id_mapel='$id_ujian'" . $sqljabatanregion . " ORDER BY id_kelas ASC");
 	$betul = array();
 	$salah = array();
 	while ($siswa = mysqli_fetch_array($siswaQ)) {
