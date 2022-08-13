@@ -151,6 +151,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                     <th width='5px'>#</th>
                                     <th>No Peserta</th>
                                     <th>Nama</th>
+                                    <th>Jabatan</th>
                                     <th>Kelas</th>
                                     <th>Lama Ujian</th>
                                     <th>Analisis</th>
@@ -194,6 +195,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                         <td><?= $no ?></td>
                                         <td><?= $siswa['no_peserta'] ?></td>
                                         <td><?= $siswa['nama'] ?></td>
+                                        <td><?= $siswa['jabatan'] ?></td>
                                         <td><?= $siswa['id_kelas'] ?></td>
                                         <td><?= $ket . " " . lamaujian($selisih) ?></td>
                                         <td><?= $jawaban ?></td>
