@@ -307,20 +307,20 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 							<a href='#'><i class="fas fa-file-signature side-menu-icon fa-fw"></i><span> Nilai </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=nilaiujian'><i class='fas fa-angle-double-right fa-fw'></i> <span> Hasil Nilai</span></a></li>
-								<li><a href='?pg=semuanilai'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Semua Nilai</span></a></li>
+								<!-- <li><a href='?pg=semuanilai'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Semua Nilai</span></a></li> -->
 								<?php if ($setting['server'] == 'lokal') : ?>
 									<li><a href='?pg=dataujian'><i class='fas fa-angle-double-right fa-fw'></i> <span>Kirim Nilai</span></a></li>
 								<?php endif ?>
 							</ul>
 						</li>
-						<li class='treeview'>
+						<!-- <li class='treeview'>
 							<a href='#'><i class="fas fa-print side-menu-icon fa-fw"></i><span> Cetak </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=absen'><i class='fas fa-angle-double-right fa-fw'></i> <span> Daftar Hadir</span></a></li>
 								<li><a href='?pg=kartu'><i class='fas fa-angle-double-right fa-fw'></i> <span> Cetak Kartu</span></a></li>
 								<li><a href='?pg=berita'><i class='fas fa-angle-double-right fa-fw'></i> <span> Berita Acara</span></a></li>
 							</ul>
-						</li>
+						</li> -->
 
 						<li class='treeview'><a href='?pg=pengumuman'><i class="fas fa-bullhorn side-menu-icon fa-fw"></i> <span> Pengumuman</span></a></li>
 						<li class='treeview'>
