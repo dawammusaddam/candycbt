@@ -33,6 +33,7 @@ $tglsekarang = time();
     <link rel='stylesheet' href='<?= $homeurl ?>/plugins/iCheck/square/green.css' />
     <link rel='stylesheet' href='<?= $homeurl ?>/plugins/animate/animate.min.css'>
     <link rel='stylesheet' href='<?= $homeurl ?>/plugins/sweetalert2/dist/sweetalert2.min.css'>
+	<link rel='stylesheet' href='<?= $homeurl ?>/plugins/select2/select2.min.css' />
     <!-- <link rel='stylesheet' href='<?= $homeurl ?>/plugins/slidemenu/jquery-slide-menu.css'> -->
     <link rel='stylesheet' href='<?= $homeurl ?>/plugins/toastr/toastr.min.css'>
     <link rel='stylesheet' href='<?= $homeurl ?>/plugins/radio/css/style.css'>
@@ -198,10 +199,11 @@ $tglsekarang = time();
                     <li><a href='<?= $homeurl ?>'><i class='fas fa-tachometer-alt fa-fw  '></i> <span> Dashboard</span></a></li>
                     <li><a href='<?= $homeurl ?>/jadwal'><i class='fas fa-calendar fa-fw  '></i> <span> Jadwal Ujian</span></a></li>
                     <!-- <li><a href='<?= $homeurl ?>/materi'><i class='fas fa-file fa-fw  '></i> <span> Materi Belajar</span></a></li> -->
-                    <li><a href='<?= $homeurl ?>/tugassiswa'><i class='fas fa-edit fa-fw  '></i> <span> Tugas Siswa</span></a></li>
+                    <!-- <li><a href='<?= $homeurl ?>/tugassiswa'><i class='fas fa-edit fa-fw  '></i> <span> Tugas Siswa</span></a></li> -->
                     
                     <li><a href='<?= $homeurl ?>/hasil'><i class='fas fa-tags fa-fw '></i> <span> Hasil Ujian</span></a></li>
                      <!-- <li><a href='brocandycbt.apk'><i class='fas fa-fw  fa-star'></i> <span>Exambro</span></a></li> -->
+                    <li><a href='<?= $homeurl ?>/proyek-perubahan'><i class='fas fa-edit fa-fw  '></i> <span> Proyek Perubahan</span></a></li>
                 </ul><!-- /.sidebar-menu -->
             </section>
         </aside>
@@ -525,6 +527,8 @@ $tglsekarang = time();
                         });
                     </script>
                     
+                <?php elseif ($pg == 'proyek-perubahan') : ?>
+                    <?php include "tugasrktl.php" ?>
                 <?php elseif ($pg == 'tugassiswa') : ?>
                     <?php include "tugas.php" ?>
                 <?php elseif ($pg == 'materi') : ?>
@@ -915,7 +919,9 @@ $tglsekarang = time();
     <script src='<?= $homeurl ?>/plugins/mousetrap/mousetrap.min.js'></script>
     <script src='<?= $homeurl ?>/plugins/MathJax-2.7.3/MathJax.js?config=TeX-AMS_HTML-full'></script>
     <script src='<?= $homeurl ?>/plugins/toastr/toastr.min.js'></script>
+	<script src='<?= $homeurl ?>/plugins/select2/select2.min.js'></script>
     <script>
+        $('.select2').select2();
         $('.loader').fadeOut('slow');
         var url = window.location;
         $('ul.sidebar-menu a').filter(function() {
