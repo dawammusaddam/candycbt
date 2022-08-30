@@ -528,7 +528,11 @@ $tglsekarang = time();
                     </script>
                     
                 <?php elseif ($pg == 'proyek-perubahan') : ?>
+                    <?php include "tugasrktllist.php" ?>
+                <?php elseif ($pg == 'proyek-perubahan-buat') : ?>
                     <?php include "tugasrktl.php" ?>
+                <?php elseif ($pg == 'proyek-perubahan-detail') : ?>
+                    <?php include "tugasrktldetail.php" ?>
                 <?php elseif ($pg == 'tugassiswa') : ?>
                     <?php include "tugas.php" ?>
                 <?php elseif ($pg == 'materi') : ?>

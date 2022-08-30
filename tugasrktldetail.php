@@ -1,27 +1,6 @@
 <?php
 defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!');
 ?>
-<?php
-    if(isset($_POST['tambahrktl'])){
-        $siswa = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM siswa WHERE id_siswa='$_SESSION[id_siswa]'"));
-
-        $id_siswa = $siswa['id_siswa'];
-        $judul = $_POST['judul'];
-        $id_kategori = $_POST['id_kategori'];
-        $obyekperubahan = $_POST['obyekperubahan'];
-        $lokasi = $_POST['lokasi'];
-        $targetwaktu = $_POST['targetwaktu'];
-        $isiproyekperubahan = $_POST['isiproyekperubahan'];
-        $kesimpulan = $_POST['kesimpulan'];
-        
-        $exec = mysqli_query($koneksi, "INSERT INTO proyek_perubahan (id_siswa, judul, id_kategori, obyekperubahan, lokasi, targetwaktu, isiproyekperubahan, kesimpulan) VALUES ('$id_siswa', '$judul', '$id_kategori', '$obyekperubahan', '$lokasi', '$targetwaktu', '$isiproyekperubahan', '$kesimpulan')");
-
-        if(!$exec){
-            echo mysqli_error($koneksi);
-       }
-        (!$exec) ? $info = info("Gagal menyimpan!", "NO") : jump("proyek-perubahan");
-    }
-?>
 <div class='row'>
     <div class='col-md-12'>
         <div class='box box-solid'>
@@ -29,6 +8,10 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                 <h3 class='box-title'><i class="fas fa-edit    "></i> Proyek Perubahan</h3>
             </div><!-- /.box-header -->
             <div class='box-body'>
+                <?php
+                    $id_proyek_perubahan = 1;
+                    $proyek_perubahan = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM proyek_perubahan pp JOIN proyek_perubahan_kategori ppk ON pp.id_kategori=ppk.id_kategori WHERE pp.id_proyek_perubahan='$id_proyek_perubahan'"));
+                ?>
                 <div class='row'>
                     <form action='' method='post'>
                         <div class="col-md-6">
@@ -36,67 +19,13 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 <div class='box-header with-border'>
                                     <h3 class='box-title'> Tulis Proyek Perubahan</h3>
                                 </div>
-                                <div class='col-sm-12'>
-                                    <div class='form-group'>
-                                        <label>Judul </label>
-                                        <input type='text' class='form-control' name='judul' placeholder='Judul' required>
-                                    </div>
+                                <div class="mt-2">
+                                    <h5 class="mb-75">Judul:</h5>
+                                    <p class="card-text"><?= $proyek_perubahan['judul'] ?></p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Kategori</label>
-                                        <select class="form-control" name="id_kategori" required>
-                                            <?php $pry_kat = mysqli_query($koneksi, "SELECT * FROM proyek_perubahan_kategori"); ?>
-                                            <option value=""> Pilih Kategori</option>
-                                            <?php while ($pry = mysqli_fetch_array($pry_kat)) : ?>
-                                                <option value="<?= $pry['id_kategori'] ?>"><?= $pry['nama'] ?></option>
-                                            <?php endwhile; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Obyek Perubahan</label>
-                                        <input type="text" class="form-control" name="obyekperubahan" placeholder="Siapa Objek Perubahan Anda">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Lokasi Provinsi</label>
-                                        <select id="select-prov" class="form-control select2" required>
-                                            <option value=''> Pilih Provinsi</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Lokasi Kabupaten</label>
-                                        <select id="select-kab" class="form-control select2" required>
-                                            <option value=''> Pilih Kabupaten</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Lokasi Kecamatan</label>
-                                        <select id="select-kec" class="form-control select2" required>
-                                            <option value=''> Pilih Kecamatan</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Lokasi Kelurahan</label>
-                                        <select name="lokasi" id="select-kel" class="form-control select2" required>
-                                            <option value=''> Pilih Kelurahan</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Target Waktu</label>
-                                        <input name="targetwaktu" type="date" class="form-control" required/>
-                                    </div>
+                                <div class="mt-2">
+                                    <h5 class="mb-75">Judul:</h5>
+                                    <p class="card-text"><?= $proyek_perubahan['judul'] ?></p>
                                 </div>
                             </div>
                         </div>
