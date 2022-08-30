@@ -86,9 +86,9 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Lokasi Kelurahan</label>
+                                        <label>Lokasi Desa</label>
                                         <select name="lokasi" id="select-kel" class="form-control select2" required>
-                                            <option value=''> Pilih Kelurahan</option>
+                                            <option value=''> Pilih Desa</option>
                                         </select>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 
                 html = '<option value=""> Pilih Kabupaten </option>';$('#select-kab').html(html);
                 html = '<option value=""> Pilih Kecamatan </option>';$('#select-kec').html(html);
-                html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
+                html = '<option value=""> Pilih Desa </option>';$('#select-kel').html(html);
             }
         });
         
@@ -198,7 +198,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                     $("#select-kab").val(kab_id).change();
 
                     html = '<option value=""> Pilih Kecamatan </option>';$('#select-kec').html(html);
-                    html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
+                    html = '<option value=""> Pilih Desa </option>';$('#select-kel').html(html);
                 }
             });
         });
@@ -215,7 +215,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                     $('#select-kec').html(html);
                     $("#select-kec").val(kec_id).change();
 
-                    html = '<option value=""> Pilih Kelurahan </option>';$('#select-kel').html(html);
+                    html = '<option value=""> Pilih Desa </option>';$('#select-kel').html(html);
                 }
             });
         });
@@ -228,7 +228,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                 contentType: "application/json",
                 dataType: 'json',
                 success: function(res){
-                    var html = optionBuilder('Pilih Kelurahan', res);
+                    var html = optionBuilder('Pilih Desa', res);
                     $('#select-kel').html(html);
                     $("#select-kel").val(kel_id).change();
                 }
