@@ -134,6 +134,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 
 <script>
     tinymce.init({
+        height : "380",
         selector: '#txtisiproyekperubahan',
         plugins: [
             'advlist autolink lists link image charmap print preview hr anchor pagebreak',
