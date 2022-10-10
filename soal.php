@@ -478,7 +478,7 @@ $image = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'JPG', 'JPEG', 'PNG', 'GIF', 
                         <?php if ($soal['jenis'] == 1) { ?>
                             <td style="text-align:center">
 
-                                <div id='load-ragu'>
+                                <div id='load-ragu' style="display: none;">
                                     <a href='#' class='btn btn-warning'><input type='checkbox' onclick="radaragu(<?= $id_mapel ?>,<?= $id_siswa ?>,<?= $soal['id_soal'] ?>, <?= $ac ?>)" <?= $ragu = ($jawab['ragu'] == 1) ? 'checked' : ''; ?> /> Ragu <span class='hidden-xs'>- Ragu</span></a>
                                 </div>
 

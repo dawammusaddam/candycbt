@@ -368,7 +368,7 @@ $tglsekarang = time();
                                                                              ?>
                                                                         </h3>
                                                                         <h5 class="widget-user-desc">
-                                                                            <i class="fa fa-tag"></i> <?= $mapelx['kode_ujian'] ?> &nbsp;
+                                                                            <!-- <i class="fa fa-tag"></i> <?//= $mapelx['kode_ujian'] ?> &nbsp; -->
                                                                             <i class="fa fa-user"></i> <?= $mapelx['level'] ?> &nbsp;
                                                                             <i class="fa fa-wrench"></i> <?php
                                                                                                             $dataArray = unserialize($mapelx['id_pk']);
@@ -443,7 +443,7 @@ $tglsekarang = time();
                                                                                 }
                                                                              ?></h5>
                                                                     <h5 class="widget-user-desc">
-                                                                        <i class="fa fa-tag"></i> <?= $mapelx['kode_ujian'] ?> &nbsp;
+                                                                        <!-- <i class="fa fa-tag"></i> <?//= $mapelx['kode_ujian'] ?> &nbsp; -->
                                                                         <i class="fa fa-user"></i> <?= $mapelx['level'] ?> &nbsp;
                                                                         <i class="fa fa-wrench"></i> <?php
                                                                                                         $dataArray = unserialize($mapelx['id_pk']);

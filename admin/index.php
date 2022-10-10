@@ -278,7 +278,7 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 							<a href='#'><i class="fas fa-envelope-open-text side-menu-icon fa-fw"></i><span> Bank Soal </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=banksoal'><i class='fas fa-angle-double-right fa-fw'></i> <span> Daftar Soal</span></a></li>
-								<li><a href='?pg=filependukung'><i class='fas fa-angle-double-right  fa-fw'></i> <span>File Pendukung</span></a></li>
+								<!-- <li><a href='?pg=filependukung'><i class='fas fa-angle-double-right  fa-fw'></i> <span>File Pendukung</span></a></li> -->
 
 							</ul>
 						</li>
@@ -910,10 +910,10 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 												<input type='text' class='form-control' name='judul' placeholder='Judul' required>
 											</div>
 										</div>
-										<div class='col-sm-12'>
+										<div class='col-sm-12' style="display: none;">
 											<div class='form-group'>
 												<label>Jenis Pengumuman </label><br>
-												<input type='radio' name='tipe' value='internal' checked> <span class='text-green'><b>guru</b></span> &nbsp; &nbsp;&nbsp;<input type='radio' name='tipe' value='eksternal'> <span class='text-blue'><b>siswa</b></span>
+												<input type='radio' name='tipe' value='internal' > <span class='text-green'><b>guru</b></span> &nbsp; &nbsp;&nbsp;<input type='radio' name='tipe' checked value='eksternal'> <span class='text-blue'><b>siswa</b></span>
 											</div>
 										</div>
 										<div class='col-sm-12'>

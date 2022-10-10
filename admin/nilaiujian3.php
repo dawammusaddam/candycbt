@@ -156,7 +156,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                     <th>Lama Ujian</th>
                                     <th>Analisis</th>
                                     <th>Nilai PG</th>
-                                    <th>Essai</th>
+                                    <!-- <th>Essai</th> -->
                                     <th>Total</th>
                                     <th>Jawaban</th>
                                 </tr>
@@ -200,7 +200,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                         <td><?= $ket . " " . lamaujian($selisih) ?></td>
                                         <td><?= $jawaban ?></td>
                                         <td><?= $skor ?></td>
-                                        <td><?= $esai ?></td>
+                                        <!-- <td><?//= $esai ?></td> -->
                                         <td><?= $total ?></td>
                                         <td>
                                             <?php if ($nilai['skor'] <> "") : ?>
@@ -216,12 +216,12 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                                     $link2 = '#';
                                                 endif;
                                                 ?>
-                                                <!-- <a href='<?= $link ?>' class='btn btn-xs btn-success' <?= $ket ?>><i class='fa fa-pencil-square-o'></i>input esai</a> -->
+                                                <!-- <a href='<?//= $link ?>' class='btn btn-xs btn-success' <?//= $ket ?>><i class='fa fa-pencil-square-o'></i>input esai</a> -->
                                                 <a href='<?= $link2 ?>' class='btn btn-sm btn-success' <?= $ket ?>><i class='fa fa-eye'></i> lihat</a>
                                                 <button class='ulangnilai btn btn-sm btn-danger' data-id="<?= $nilai['id_nilai'] ?>" <?= $ket ?>><i class='fa fa-recycle'></i> Ulang</button>
                                                 <!-- Button trigger modal -->
                                                 <?php if ($nilai['jawaban_esai'] <> null) { ?>
-                                                    <button type="button" class="btn btn-sm btn-primary " data-toggle="modal" data-target="#modelId<?= $nilai['id_nilai'] ?>">
+                                                    <button style="display: none;" type="button" class="btn btn-sm btn-primary " data-toggle="modal" data-target="#modelId<?= $nilai['id_nilai'] ?>">
                                                         <i class="fas fa-edit    "></i> Esai
                                                     </button>
 

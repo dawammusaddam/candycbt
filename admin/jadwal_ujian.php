@@ -84,14 +84,14 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 						<label>
 							<input type='checkbox' class='icheckbox_square-green' name='acakopsi' value='1' /> Acak Opsi
 						</label>
-						<label>
+						<label style="display: none;">
 							<input type='checkbox' class='icheckbox_square-green' name='token' value='1' /> Token Soal
 						</label>
 
-						<label>
+						<label style="display: none;">
 							<input type='checkbox' class='icheckbox_square-green' name='hasil' value='1' /> Hasil Tampil
 						</label>
-						<label>
+						<label style="display: none;">
 							<input type='checkbox' class='icheckbox_square-green' name='reset' value='1' /> Reset Login
 						</label>
 					</div>
@@ -353,17 +353,17 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 																															echo "checked='true'";
 																														} ?> /> Acak Opsi
 									</label>
-									<label>
+									<label style="display: none;">
 										<input type='checkbox' class='icheckbox_square-green' name='token' value='1' <?php if ($mapel['token'] == 1) {
 																															echo "checked='true'";
 																														} ?> /> Token Soal
 									</label>
-									<label>
+									<label style="display: none;">
 										<input type='checkbox' class='icheckbox_square-green' name='hasil' value='1' <?php if ($mapel['hasil'] == 1) {
 																															echo "checked='true'";
 																														} ?> /> Hasil Tampil
 									</label>
-									<label>
+									<label style="display: none;">
 										<input type='checkbox' class='icheckbox_square-green' name='reset' value='1' <?php if ($mapel['reset'] == 1) {
 																															echo "checked='true'";
 																														} ?> /> Reset Login

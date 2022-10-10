@@ -347,7 +347,7 @@ if ($ac == '') :
 																</div>
 															</div>
 														</div>
-														<div class='form-group'>
+														<div class='form-group' style="display:none;">
 															<div class='row'>
 																<div class='col-md-3'>
 																	<label>Jumlah Soal Essai</label>
@@ -367,7 +367,7 @@ if ($ac == '') :
 																</div>
 															</div>
 														</div>
-														<div class='form-group'>
+														<div class='form-group' style="display:none;">
 															<div class='row'>
 																<?php if ($pengawas['level'] == 'admin') : ?>
 																	<div class='col-md-4'>
@@ -521,9 +521,9 @@ if ($ac == '') :
 									<label>Jumlah Soal PG</label>
 									<input type='number' id='soalpg' name='jml_soal' class='form-control' required='true' />
 								</div>
-								<div class='col-md-3'>
+								<div class='col-md-3' style="display: none;">
 									<label>Bobot Soal PG %</label>
-									<input type='number' name='bobot_pg' class='form-control' required='true' />
+									<input type='number' name='bobot_pg' class='form-control' required='true' value="100" />
 								</div>
 								<div class='col-md-3'>
 									<label>Soal Tampil</label>
@@ -539,27 +539,27 @@ if ($ac == '') :
 								</div>
 							</div>
 						</div>
-						<div class='form-group'>
+						<div class='form-group' style="display:none;">
 							<div class='row'>
 								<div class='col-md-3'>
 									<label>Jumlah Soal Essai</label>
-									<input type='number' id='soalesai' name='jml_esai' class='form-control' />
+									<input type='number' id='soalesai' name='jml_esai' class='form-control' value="0" />
 								</div>
 								<div class='col-md-3'>
 									<label>Bobot Soal Essai %</label>
-									<input type='number' name='bobot_esai' class='form-control' />
+									<input type='number' name='bobot_esai' class='form-control' value="0" />
 								</div>
 								<div class='col-md-3'>
 									<label>Soal Tampil</label>
-									<input type='number' id='tampilesai' name='tampil_esai' class='form-control' />
+									<input type='number' id='tampilesai' name='tampil_esai' class='form-control' value="0" />
 								</div>
 								<div class='col-md-3'>
 									<label>KKM</label>
-									<input type='number' name='kkm' class='form-control' required='true' />
+									<input type='number' name='kkm' class='form-control' required='true' value="0" />
 								</div>
 							</div>
 						</div>
-						<div class='form-group'>
+						<div class='form-group' style="display:none;">
 							<div class='row'>
 								<?php if ($pengawas['level'] == 'admin') : ?>
 									<div class='col-md-4'>
