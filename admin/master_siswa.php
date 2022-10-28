@@ -41,12 +41,12 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 				<div class='box-header with-border '>
 					<h3 class='box-title'><i class="fas fa-user-friends fa-fw   "></i> Peserta Ujian</h3>
 					<div class='box-tools pull-right'>
-						<?php if ($pengawas['level'] == 'admin') : ?>
+						<?php if ($pengawas['level'] == 'admin' || $pengawas['level'] == 'guru') : ?>
 							<?php if ($setting['server'] == 'pusat') : ?>
 								<a data-toggle='modal' data-backdrop="static" data-target='#tambahsiswa' class='btn btn-sm btn-primary'><i class='glyphicon glyphicon-plus'></i> <span class='hidden-xs'>Tambah</span></a>
 							<?php endif; ?>
-							<a href='?pg=uplfotosiswa' class='btn btn-sm btn-danger'><i class='fa fa-image'></i> <span class='hidden-xs'>Upload Foto</span></a>
-							<a href='ekspor_siswa.php' class='btn btn-sm btn-success'><i class='fa fa-download'></i> <span class='hidden-xs'>Download Data</span></a>
+							<!-- <a href='?pg=uplfotosiswa' class='btn btn-sm btn-danger'><i class='fa fa-image'></i> <span class='hidden-xs'>Upload Foto</span></a>
+							<a href='ekspor_siswa.php' class='btn btn-sm btn-success'><i class='fa fa-download'></i> <span class='hidden-xs'>Download Data</span></a> -->
 						<?php endif ?>
 					</div>
 				</div><!-- /.box-header -->
@@ -90,20 +90,20 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 										<div class='form-group'>
 											<div class='row'>
 												<div class='col-md-6'>
-													<label>NIS</label>
+													<label>NIS (NIK)</label>
 													<input type='text' name='nis' class='form-control' required='true' />
 												</div>
-												<div class='col-md-6'>
+												<div class='col-md-6' style="display:none;">
 													<label>Nomor Peserta</label>
-													<input type='text' name='no_peserta' class='form-control' required='true' />
+													<input type='text' name='no_peserta' class='form-control' required='true' value="-" />
 												</div>
 											</div>
 										</div>
 										<div class='form-group'>
-											<label>Nama</label>
+											<label>Nama (Nama Peserta)</label>
 											<input type='text' name='nama' class='form-control' required='true' />
 										</div>
-										<div class='form-group'>
+										<div class='form-group' style="display:none;">
 											<div class='row'>
 												<div class='col-md-4'>
 													<label>Kelas</label>
@@ -112,7 +112,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 														<?php
 														$kelasQ = mysqli_query($koneksi, "SELECT * FROM kelas ORDER BY nama ASC");
 														while ($kelas = mysqli_fetch_array($kelasQ)) {
-															echo "<option value='$kelas[id_kelas]' $s>$kelas[nama]</option>";
+															echo "<option selected value='$kelas[id_kelas]' $s>$kelas[nama]</option>";
 														}
 														?>
 													</select>
@@ -124,7 +124,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 														<?php
 														$pkQ = mysqli_query($koneksi, "SELECT * FROM level ");
 														while ($pk = mysqli_fetch_array($pkQ)) {
-															echo "<option value='$pk[kode_level]'>$pk[kode_level]</option>";
+															echo "<option selected value='$pk[kode_level]'>$pk[kode_level]</option>";
 														}
 														?>
 													</select>
@@ -145,7 +145,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 												<?php endif ?>
 											</div>
 										</div>
-										<div class='form-group'>
+										<div class='form-group' style="display:none;">
 											<div class='row'>
 												<div class='col-md-4'>
 													<label>Sesi</label>
@@ -155,7 +155,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 														$sesiQ = mysqli_query($koneksi, "SELECT * FROM sesi ");
 														while ($sesi = mysqli_fetch_array($sesiQ)) {
 
-															echo "<option value='$sesi[kode_sesi]' $s>$sesi[kode_sesi]</option>";
+															echo "<option selected value='$sesi[kode_sesi]' $s>$sesi[kode_sesi]</option>";
 														}
 														?>
 													</select>
@@ -167,7 +167,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 														<?php
 														$pkQ = mysqli_query($koneksi, "SELECT * FROM ruang ");
 														while ($pk = mysqli_fetch_array($pkQ)) {
-															echo "<option value='$pk[kode_ruang]'>$pk[kode_ruang]</option>";
+															echo "<option selected value='$pk[kode_ruang]'>$pk[kode_ruang]</option>";
 														}
 														?>
 													</select>
@@ -179,7 +179,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 														<?php
 														$pkQ = mysqli_query($koneksi, "SELECT * FROM server ");
 														while ($sr = mysqli_fetch_array($pkQ)) {
-															echo "<option value='$sr[kode_server]'>$sr[kode_server]</option>";
+															echo "<option selected value='$sr[kode_server]'>$sr[kode_server]</option>";
 														}
 														?>
 													</select>
@@ -191,7 +191,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 														<?php
 														$agamaQ = mysqli_query($koneksi, "SELECT * FROM agama ");
 														while ($ag = mysqli_fetch_array($agamaQ)) {
-															echo "<option value='$ag[agamaku]'>$ag[agamaku]</option>";
+															echo "<option selected value='$ag[agamaku]'>$ag[agamaku]</option>";
 														}
 														?>
 													</select>
@@ -199,17 +199,17 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 											</div>
 										</div>
 										<div class='form-group'>
-											<label>Username</label>
+											<label>Username (NIK)</label>
 											<input type='text' name='username' class='form-control' required='true' />
 										</div>
 										<div class='form-group'>
 											<div class='row'>
 												<div class='col-md-6'>
-													<label>Password</label>
+													<label>Password (NIK)</label>
 													<input type='password' name='pass1' class='form-control' required='true' />
 												</div>
 												<div class='col-md-6'>
-													<label>Ulang Password</label>
+													<label>Ulang Password (NIK)</label>
 													<input type='password' name='pass2' class='form-control' required='true' />
 												</div>
 											</div>
@@ -493,8 +493,9 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 							'sClass': 'text-center',
 							'orderable': false,
 							'mRender': function(data) {
-								return '<a class="btn btn-flat btn-xs bg-yellow" href="?pg=siswa&ac=edit&id=' + data + '"><i class="fas fa-edit"></i></a>\n\
-                                <a class="btn btn-flat btn-xs bg-maroon" href="?pg=siswa&ac=hapussiswa&id=' + data + '" onclick="javascript:return confirm(\'Anda yakin akan menghapus data ini?\');"><i class="fa fa-trash"></i></a>';
+								return "";
+								// return '<a class="btn btn-flat btn-xs bg-yellow" href="?pg=siswa&ac=edit&id=' + data + '"><i class="fas fa-edit"></i></a>\n\
+                                // <a class="btn btn-flat btn-xs bg-maroon" href="?pg=siswa&ac=hapussiswa&id=' + data + '" onclick="javascript:return confirm(\'Anda yakin akan menghapus data ini?\');"><i class="fa fa-trash"></i></a>';
 							}
 						}
 					<?php } ?>

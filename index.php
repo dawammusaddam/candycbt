@@ -203,7 +203,7 @@ $tglsekarang = time();
                     
                     <li><a href='<?= $homeurl ?>/hasil'><i class='fas fa-tags fa-fw '></i> <span> Hasil Ujian</span></a></li>
                      <!-- <li><a href='brocandycbt.apk'><i class='fas fa-fw  fa-star'></i> <span>Exambro</span></a></li> -->
-                    <li><a href='<?= $homeurl ?>/proyek-perubahan'><i class='fas fa-edit fa-fw  '></i> <span> Proyek Perubahan</span></a></li>
+                    <!-- <li><a href='<?//= $homeurl ?>/proyek-perubahan'><i class='fas fa-edit fa-fw  '></i> <span> Proyek Perubahan</span></a></li> -->
                 </ul><!-- /.sidebar-menu -->
             </section>
         </aside>
@@ -435,13 +435,18 @@ $tglsekarang = time();
                                                                         <img src="dist/img/soal.png" alt="">
                                                                     </div>
                                                                     <!-- /.widget-user-image -->
-                                                                    <h5 class="widget-user-usernam"><?php
-                                                                                if (strlen($mapelx['nama']) > 25) {
-                                                                                    echo substr($mapelx['nama'], 0, 25) . "...";
-                                                                                } else {
-                                                                                    echo $mapelx['nama'];
-                                                                                }
-                                                                             ?></h5>
+                                                                    <h5 class="widget-user-usernam">
+                                                                        <?php
+                                                                                // if (strlen($mapelx['nama']) > 25) {
+                                                                                //     echo substr($mapelx['nama'], 0, 25) . "...";
+                                                                                // } else {
+                                                                                //     echo $mapelx['nama'];
+                                                                                // }
+                                                                             ?>
+                                                                             <?php
+                                                                                echo $mapelx['kode_nama']; 
+                                                                             ?>
+                                                                    </h5>
                                                                     <h5 class="widget-user-desc">
                                                                         <!-- <i class="fa fa-tag"></i> <?//= $mapelx['kode_ujian'] ?> &nbsp; -->
                                                                         <i class="fa fa-user"></i> <?= $mapelx['level'] ?> &nbsp;

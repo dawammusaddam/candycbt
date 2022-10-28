@@ -30,14 +30,14 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 							?>
 						</select>
 					</div>
-					<div class='form-group'>
+					<div class='form-group' style='display: none;'>
 						<label>Nama Jenis Ujian</label>
 						<select name='kode_ujian' class='form-control' required='true'>
 							<option value=''>Pilih Jenis Ujian </option>
 							<?php
 							$namaujianx = mysqli_query($koneksi, "SELECT * FROM jenis where status='aktif' order by nama ASC");
 							while ($ujian = mysqli_fetch_array($namaujianx)) {
-								echo "<option value='$ujian[id_jenis]'>$ujian[id_jenis] - $ujian[nama] </option>";
+								echo "<option selected value='$ujian[id_jenis]'>$ujian[id_jenis] - $ujian[nama] </option>";
 							}
 							?>
 						</select>
@@ -444,7 +444,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
 			url: 'jadwal/tambah_jadwal.php',
 			data: $(this).serialize(),
 			success: function(data) {
-				console.log(data);
+				console.log("cook ===> " +data);
 				if (data == "OK") {
 					toastr.success("jadwal berhasil dibuat");
 				} else {
