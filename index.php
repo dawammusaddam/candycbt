@@ -201,7 +201,7 @@ $tglsekarang = time();
                     <!-- <li><a href='<?= $homeurl ?>/materi'><i class='fas fa-file fa-fw  '></i> <span> Materi Belajar</span></a></li> -->
                     <!-- <li><a href='<?= $homeurl ?>/tugassiswa'><i class='fas fa-edit fa-fw  '></i> <span> Tugas Siswa</span></a></li> -->
                     
-                    <li><a href='<?= $homeurl ?>/hasil'><i class='fas fa-tags fa-fw '></i> <span> Hasil Ujian</span></a></li>
+                    <!-- <li><a href='<?//= $homeurl ?>/hasil'><i class='fas fa-tags fa-fw '></i> <span> Hasil Ujian</span></a></li> -->
                      <!-- <li><a href='brocandycbt.apk'><i class='fas fa-fw  fa-star'></i> <span>Exambro</span></a></li> -->
                     <!-- <li><a href='<?//= $homeurl ?>/proyek-perubahan'><i class='fas fa-edit fa-fw  '></i> <span> Proyek Perubahan</span></a></li> -->
                 </ul><!-- /.sidebar-menu -->
@@ -289,6 +289,7 @@ $tglsekarang = time();
                                     <?php
 
                                     $mapelQ = mysqli_query($koneksi, "SELECT * FROM ujian WHERE (level='$level' or level='semua') AND sesi='$idsesi' AND status='1' ORDER BY tgl_ujian ");
+                                    $pretestDone = mysqli_fetch_object(mysqli_query($koneksi, "SELECT COUNT(n.id_nilai) AS done FROM nilai n JOIN ujian u ON n.id_ujian = u.id_ujian WHERE n.id_siswa = " . $id_siswa . " AND u.kode_nama = 'PRETEST' AND n.ujian_selesai IS NOT NULL;"));
 
                                     ?>
                                     <?php while ($mapelx = mysqli_fetch_array($mapelQ)) : ?>
@@ -306,12 +307,17 @@ $tglsekarang = time();
                                                         'id_siswa' => $id_siswa
                                                         //'kode_ujian' => $mapelx['kode_ujian']
                                                     );
+                                                    echo '====> ' . json_encode($mapelx['id_mapel']);
                                                     $nilai = fetch($koneksi, 'nilai', $where);
                                                     $ceknilai = rowcount($koneksi, 'nilai', $where);
                                                     if ($ceknilai == '0') :
                                                         if (strtotime($mapelx['tgl_ujian']) <= time() and time() <= strtotime($mapelx['tgl_selesai'])) :
                                                             $status = '<label class="label label-success">Tersedia </label>';
-                                                            $btntest = "<button data-id='$mapelx[id_ujian]' data-ids='$id_siswa' class='btnmulaitest btn btn-block btn-sm btn-primary'><i class='fa fa-edit'></i> MULAI</button>";
+                                                            if($mapelx['kode_nama'] == 'POSTTEST' && $pretestDone->done == 0){
+                                                                $btntest = "<button class='btn btn-block btn-sm btn-danger disabled'><i class='fa fa-edit'></i> SELESAIKAN PRETEST DAHULU</button>";
+                                                            }else{
+                                                                $btntest = "<button data-id='$mapelx[id_ujian]' data-ids='$id_siswa' class='btnmulaitest btn btn-block btn-sm btn-primary'><i class='fa fa-edit'></i> MULAI</button>";
+                                                            }
                                                         elseif (strtotime($mapelx['tgl_ujian']) >= time() and time() <= strtotime($mapelx['tgl_selesai'])) :
                                                             $status = '<label class="label label-danger">Belum Waktunya</label>';
                                                             $btntest = "<button' class='btn btn-block btn-sm btn-danger disabled'> BELUM UJIAN</button>";

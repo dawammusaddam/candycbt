@@ -2792,31 +2792,28 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 									<div class='tab-content'>
 										<div class='tab-pane active' id='detail'>
 											<div class='row margin-bottom'>
-												<form action='' method='post'>
 													<div class='col-sm-12'>
 														<table class='table table-striped table-bordered'>
 															<tbody>
 																<tr>
 																	<th scope='row'>Nama Lengkap</th>
-																	<td><input class='form-control' name='nama' value="<?= $guru['nama'] ?>" /></td>
+																	<td><input disabled class='form-control' name='nama' value="<?= $guru['nama'] ?>" /></td>
 																</tr>
 																<tr>
 																	<th scope='row'>Nip</th>
-																	<td><input class='form-control' name='nip' value="<?= $guru['nip'] ?>" /></td>
+																	<td><input disabled class='form-control' name='nip' value="<?= $guru['nip'] ?>" /></td>
 																</tr>
 																<tr>
 																	<th scope='row'>Username</th>
-																	<td><input class='form-control' name='username' value="<?= $guru['username'] ?>" /></td>
+																	<td><input disabled class='form-control' name='username' value="<?= $guru['username'] ?>" /></td>
 																</tr>
 																<tr>
 																	<th scope='row'>Password</th>
-																	<td><input class='form-control' name='password' value="<?= $guru['password'] ?>" /></td>
+																	<td><input disabled class='form-control' name='password' value="<?= $guru['password'] ?>" /></td>
 																</tr>
 															</tbody>
 														</table>
-														<button name='submit' class='btn btn-sm btn-flat btn-success pull-right'>Perbarui Data </button>
 													</div>
-												</form>
 											</div>
 										</div>
 										<div class='tab-pane' id='alamat'>
