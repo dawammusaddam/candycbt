@@ -307,7 +307,6 @@ $tglsekarang = time();
                                                         'id_siswa' => $id_siswa
                                                         //'kode_ujian' => $mapelx['kode_ujian']
                                                     );
-                                                    echo '====> ' . json_encode($mapelx['id_mapel']);
                                                     $nilai = fetch($koneksi, 'nilai', $where);
                                                     $ceknilai = rowcount($koneksi, 'nilai', $where);
                                                     if ($ceknilai == '0') :
