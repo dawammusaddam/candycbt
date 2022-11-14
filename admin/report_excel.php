@@ -17,17 +17,17 @@ if (date('m') >= 7 and date('m') <= 12) {
 }
 
 $sqljabatanregion = "";
-if(!empty($_GET['jabatan'])){
-	$jabatan = $_GET['jabatan'];
+if(!empty($_GET['wilayah_type'])){
 	$wilayah_id = $_GET['wilayah_id'];
-	if($jabatan == 'PLD'){
-		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.kelurahan_id=" . $wilayah_id;
-	}else if($jabatan == 'PD'){
-		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.kecamatan_id=" . $wilayah_id;
-	}else if($jabatan == 'TAKAB'){
-		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.kabupaten_id=" . $wilayah_id;
-	}else if($jabatan == 'TAPROV'){
-		$sqljabatanregion .= " AND a.jabatan='" . $jabatan . "' AND a.provinsi_id=" . $wilayah_id;
+	$wilayah_type = $_GET['wilayah_type'];
+	if($wilayah_type == 'prov'){
+		$sqljabatanregion .= " AND a.provinsi_id=" . $wilayah_id;
+	}else if($wilayah_type == 'kab'){
+		$sqljabatanregion .= " AND a.kabupaten_id=" . $wilayah_id;
+	}else if($wilayah_type == 'kec'){
+		$sqljabatanregion .= " AND a.kecamatan_id=" . $wilayah_id;
+	}else if($wilayah_type == 'kel'){
+		$sqljabatanregion .= " AND a.kelurahan_id=" . $wilayah_id;
 	}
 }
 $file = "NILAI_" . $mapel['tgl_ujian'] . "_" . $mapel['nama'];

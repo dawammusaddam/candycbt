@@ -38,21 +38,21 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
     // }
 
     $sqljabatanregion = '';
-    if(!empty($_GET['jabatan'])){
-        $jabatan = $_GET['jabatan'];
+    if(!empty($_GET['wilayah_type'])){
         $wilayah_id = $_GET['wilayah_id'];
-        if($jabatan == 'PLD'){
-            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kelurahan_id=' . $wilayah_id;
-            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id, kec.id AS kec_id, kel.id AS kel_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id JOIN wilayahs kec ON kab.id = kec.parent_id JOIN wilayahs kel ON kec.id = kel.parent_id WHERE kel.id=" . $wilayah_id));
-        }else if($jabatan == 'PD'){
-            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kecamatan_id=' . $wilayah_id;
-            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id, kec.id AS kec_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id JOIN wilayahs kec ON kab.id = kec.parent_id WHERE kec.id=" . $wilayah_id));
-        }else if($jabatan == 'TAKAB'){
-            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.kabupaten_id=' . $wilayah_id;
-            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id WHERE kab.id=" . $wilayah_id));
-        }else if($jabatan == 'TAPROV'){
-            $sqljabatanregion .= ' AND a.jabatan="' . $jabatan . '" AND a.provinsi_id=' . $wilayah_id;
+        $wilayah_type = $_GET['wilayah_type'];
+        if($wilayah_type == 'prov'){
+            $sqljabatanregion .= ' AND a.provinsi_id=' . $wilayah_id;
             $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id FROM wilayahs prov WHERE prov.id=" . $wilayah_id));
+        }else if($wilayah_type == 'kab'){
+            $sqljabatanregion .= ' AND a.kabupaten_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id WHERE kab.id=" . $wilayah_id));
+        }else if($wilayah_type == 'kec'){
+            $sqljabatanregion .= ' AND a.kecamatan_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id, kec.id AS kec_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id JOIN wilayahs kec ON kab.id = kec.parent_id WHERE kec.id=" . $wilayah_id));
+        }else if($wilayah_type == 'kel'){
+            $sqljabatanregion .= ' AND a.kelurahan_id=' . $wilayah_id;
+            $selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.id AS prov_id, kab.id AS kab_id, kec.id AS kec_id, kel.id AS kel_id FROM wilayahs prov JOIN wilayahs kab ON prov.id = kab.parent_id JOIN wilayahs kec ON kab.id = kec.parent_id JOIN wilayahs kel ON kec.id = kel.parent_id WHERE kel.id=" . $wilayah_id));
         }
     }
     ?>
@@ -62,9 +62,9 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                 <div class='box-header with-border'>
                     <h3 class='box-title'> NILAI <?= $mapel['kode'] ?></h3>
                     <div class='box-tools pull-right btn-grou'>
-                        <button class='btn btn-sm btn-primary' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button>
+                        <!-- <button class='btn btn-sm btn-primary' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button> -->
                         <iframe name='frameresult' src='report.php?m=<?= $id_mapel ?>&k=<?= $id_kelas ?>' style='display:none'></iframe>
-                        <a class='btn btn-sm btn-success' href='report_excel.php?m=<?= $id_mapel ?>&jabatan=<?= $jabatan ?>&wilayah_id=<?= $wilayah_id ?>'><i class='fa fa-download'></i> Download Excel</a>
+                        <a class='btn btn-sm btn-success' href='report_excel.php?m=<?= $id_mapel ?>&wilayah_type=<?= $wilayah_type ?>&wilayah_id=<?= $wilayah_id ?>'><i class='fa fa-download'></i> Download Excel</a>
                         <a class='btn btn-sm btn-danger' href='?pg=jadwal'><i class='fa fa-times'></i></a>
                     </div>
                 </div><!-- /.box-header -->
@@ -84,15 +84,15 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 <?php endwhile; ?>
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <select id="select-jabatan" class="form-control select2 ">
-                                <option value='' <?php echo ($jabatan == '' ? 'selected' : '')?>> Pilih Jabatan</option>
-                                <option value='PLD' <?php echo ($jabatan == 'PLD' ? 'selected' : '')?>> Pendamping Lokal Desa</option>
-                                <option value='PD' <?php echo ($jabatan == 'PD' ? 'selected' : '')?>> Pendamping Desa</option>
-                                <option value='TAKAB' <?php echo ($jabatan == 'TAKAB' ? 'selected' : '')?>> TA Kabupaten</option>
-                                <option value='TAPROV' <?php echo ($jabatan == 'TAPROV' ? 'selected' : '')?>> TA Provinsi</option>
+                                <option value='' <?php //echo ($jabatan == '' ? 'selected' : '')?>> Pilih Jabatan</option>
+                                <option value='PLD' <?php //echo ($jabatan == 'PLD' ? 'selected' : '')?>> Pendamping Lokal Desa</option>
+                                <option value='PD' <?php //echo ($jabatan == 'PD' ? 'selected' : '')?>> Pendamping Desa</option>
+                                <option value='TAKAB' <?php //echo ($jabatan == 'TAKAB' ? 'selected' : '')?>> TA Kabupaten</option>
+                                <option value='TAPROV' <?php //echo ($jabatan == 'TAPROV' ? 'selected' : '')?>> TA Provinsi</option>
                             </select>
-                        </div>
+                        </div> -->
                         <!-- mryes -->
                     </div>
                     <div class="row">
@@ -127,17 +127,22 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 $('#cari_nilai').click(function() {
                                     var select_jabatan = $('#select-jabatan').val();
                                     var wilayah_id = '';
-                                    if(select_jabatan == 'PLD'){
-                                        wilayah_id = $('#select-kel').val();
-                                    }else if(select_jabatan == 'PD'){
-                                        wilayah_id = $('#select-kec').val();
-                                    }else if(select_jabatan == 'TAKAB'){
-                                        wilayah_id = $('#select-kab').val();
-                                    }else if(select_jabatan == 'TAPROV'){
+                                    var wilayah_type = '';
+                                    if($('#select-prov').val() != ''){
                                         wilayah_id = $('#select-prov').val();
+                                        wilayah_type = 'prov';
+                                    }else if($('#select-kab').val() != ''){
+                                        wilayah_id = $('#select-kab').val();
+                                        wilayah_type = 'kab';
+                                    }else if($('#select-kec').val() != ''){
+                                        wilayah_id = $('#select-kec').val();
+                                        wilayah_type = 'kec';
+                                    }else if($('#select-kel').val() != ''){
+                                        wilayah_id = $('#select-kel').val();
+                                        wilayah_type = 'kel';
                                     }
                                     var ujian = $('.ujian').val();
-                                    location.replace("?pg=nilaiujian&id=" + ujian + "&jabatan=" + select_jabatan + "&wilayah_id=" + wilayah_id);
+                                    location.replace("?pg=nilaiujian&id=" + ujian + "&wilayah_type=" + wilayah_type + "&wilayah_id=" + wilayah_id);
                                 }); //ke url
                             </script>
 
