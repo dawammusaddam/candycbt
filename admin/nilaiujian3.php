@@ -102,24 +102,24 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 <option value=''> Pilih Provinsi</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <input type="hidden" id="input-kab" value="<?= $selected_wilayah['kab_id']?>">
+                        <!-- <div class="col-md-2">
+                            <input type="hidden" id="input-kab" value="<?//= $selected_wilayah['kab_id']?>">
                             <select id="select-kab" class="form-control select2">
                                 <option value=''> Pilih Kabupaten</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <input type="hidden" id="input-kec" value="<?= $selected_wilayah['kec_id']?>">
+                            <input type="hidden" id="input-kec" value="<?//= $selected_wilayah['kec_id']?>">
                             <select id="select-kec" class="form-control select2">
                                 <option value=''> Pilih Kecamatan</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <input type="hidden" id="input-kel" value="<?= $selected_wilayah['kel_id']?>">
+                            <input type="hidden" id="input-kel" value="<?//= $selected_wilayah['kel_id']?>">
                             <select id="select-kel" class="form-control select2 ">
                                 <option value=''> Pilih Kelurahan</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
 
                             <button id="cari_nilai" class="btn btn-primary">Cari Nilai</button>
