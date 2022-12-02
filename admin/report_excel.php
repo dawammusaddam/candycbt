@@ -89,7 +89,7 @@ Jumlah Soal: <?= $mapel['jml_soal'] ?> PG / <?= $mapel['jml_esai'] ?> ESAI<br />
 	?>
 		<tr>
 			<td><?= $no ?></td>
-			<td><?= $siswa['no_peserta'] ?></td>
+			<td><?= $siswa['username'] ?></td>
 			<td><?= $siswa['nama'] ?></td>
 			<td><?= $siswa['id_kelas'] ?></td>
 			<td><?= lamaujian($selisih) ?></td>

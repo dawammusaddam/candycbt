@@ -198,7 +198,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                     ?>
                                     <tr>
                                         <td><?= $no ?></td>
-                                        <td><?= $siswa['no_peserta'] ?></td>
+                                        <td><?= $siswa['username'] ?></td>
                                         <td><?= $siswa['nama'] ?></td>
                                         <td><?= $siswa['jabatan'] ?></td>
                                         <td><?= $siswa['id_kelas'] ?></td>
