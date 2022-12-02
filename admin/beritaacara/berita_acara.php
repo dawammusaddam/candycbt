@@ -92,7 +92,7 @@
                                     </div>
                                     <div class='col-md-12'>
                                         <div class='form-group'>
-                                            <label>Siswa Tidak Hadir</label><br>
+                                            <label>Peserta Tidak Hadir</label><br>
                                             <select name='nosusulan[]' id="bcsiswaabsen" class='form-control select2' multiple='multiple' style='width:100%'>
 
                                             </select>

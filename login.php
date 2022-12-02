@@ -122,7 +122,7 @@ if ($cekdb == false) {
 							swal({
 								position: 'top-end',
 								type: 'warning',
-								title: 'Siswa tidak terdaftar',
+								title: 'Peserta tidak terdaftar',
 								showConfirmButton: false,
 								timer: 1500
 							});
