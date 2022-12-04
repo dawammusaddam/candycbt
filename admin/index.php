@@ -306,7 +306,7 @@ $ujian = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM ujian where statu
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-file-signature side-menu-icon fa-fw"></i><span> Nilai </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
-								<li><a href='?pg=nilaiujian'><i class='fas fa-angle-double-right fa-fw'></i> <span> Hasil Nilai</span></a></li>
+								<li><a href='?pg=nilaiujian&id=6&wilayah_type=prov&wilayah_id=11'><i class='fas fa-angle-double-right fa-fw'></i> <span> Hasil Nilai</span></a></li>
 								<!-- <li><a href='?pg=semuanilai'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Semua Nilai</span></a></li> -->
 								<?php if ($setting['server'] == 'lokal') : ?>
 									<li><a href='?pg=dataujian'><i class='fas fa-angle-double-right fa-fw'></i> <span>Kirim Nilai</span></a></li>
