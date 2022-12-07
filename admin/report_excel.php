@@ -31,15 +31,17 @@ if(!empty($_GET['wilayah_type'])){
 	}
 	$selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.nama AS nama FROM wilayahs prov WHERE prov.id=" . $wilayah_id));
 }
-$file = "NILAI_" . $mapel['tgl_ujian'] . "_" . $mapel['nama'];
+$file = "NILAI_" . $selected_wilayah['nama'] . "_" . $mapel['kode'];
 $file = str_replace(" ", "-", $file);
 $file = str_replace(":", "", $file);
-header("Content-type: application/octet-stream");
+header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+// header("Content-type: application/octet-stream");
 header("Pragma: no-cache");
 header("Expires: 0");
-header("Content-Disposition: attachment; filename=" . $file . ".xls"); ?>
+header("Content-Disposition: attachment; filename=" . $file . ".xlsx"); ?>
 
-Kode Mapel: <?= $selected_wilayah['nama'] ?><br />
+Wilayah: <?= $selected_wilayah['nama'] ?><br />
+Kode Mapel: <?= $mapel['kode'] ?><br />
 Tanggal Ujian: <?= buat_tanggal('D, d M Y - H:i', $mapel['tgl_ujian']) ?><br />
 Jumlah Soal: <?= $mapel['jml_soal'] ?> PG<br />
 
