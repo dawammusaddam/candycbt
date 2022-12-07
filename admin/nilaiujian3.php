@@ -97,6 +97,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                     </div>
                     <div class="row">
                         <div class="col-md-2">
+                            
                             <input type="hidden" id="input-prov" value="<?= $selected_wilayah['prov_id']?>">
                             <select id="select-prov" class="form-control select2">
                                 <option value=''> Pilih Provinsi</option>

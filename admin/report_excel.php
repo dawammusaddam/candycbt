@@ -29,6 +29,7 @@ if(!empty($_GET['wilayah_type'])){
 	}else if($wilayah_type == 'kel'){
 		$sqljabatanregion .= " AND a.kelurahan_id=" . $wilayah_id;
 	}
+	$selected_wilayah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT prov.nama AS nama FROM wilayahs prov WHERE prov.id=" . $wilayah_id));
 }
 $file = "NILAI_" . $mapel['tgl_ujian'] . "_" . $mapel['nama'];
 $file = str_replace(" ", "-", $file);
@@ -38,24 +39,23 @@ header("Pragma: no-cache");
 header("Expires: 0");
 header("Content-Disposition: attachment; filename=" . $file . ".xls"); ?>
 
-Kode Mapel: <?= $mapel['kode'] ?><br />
+Kode Mapel: <?= $selected_wilayah['nama'] ?><br />
 Tanggal Ujian: <?= buat_tanggal('D, d M Y - H:i', $mapel['tgl_ujian']) ?><br />
-Jumlah Soal: <?= $mapel['jml_soal'] ?> PG / <?= $mapel['jml_esai'] ?> ESAI<br />
+Jumlah Soal: <?= $mapel['jml_soal'] ?> PG<br />
 
 <table border='1'>
 	<tr>
 		<td rowspan='2'>No.</td>
 		<td rowspan='2'>No. Peserta</td>
 		<td rowspan='2'>Nama</td>
-		<td rowspan='2'>Kelas</td>
+		<td rowspan='2'>Kabupaten</td>
+		<td rowspan='2'>Kecamatan</td>
 		<td rowspan='2'>Lama Ujian</td>
 		<td rowspan='2'>Benar</td>
 		<td rowspan='2'>Salah</td>
 		<td rowspan='2'>Nilai PG</td>
-		<td rowspan='2'>Nilai Essai</td>
 		<td rowspan='2'>Nilai / Skor</td>
 		<td colspan='<?= $mapel['jml_soal'] ?>'>Jawaban</td>
-		<td colspan='<?= $mapel['jml_esai'] ?>'>Jawaban Esai</td>
 
 	</tr>
 	<tr><?php
@@ -91,12 +91,12 @@ Jumlah Soal: <?= $mapel['jml_soal'] ?> PG / <?= $mapel['jml_esai'] ?> ESAI<br />
 			<td><?= $no ?></td>
 			<td><?= $siswa['username'] ?></td>
 			<td><?= $siswa['nama'] ?></td>
-			<td><?= $siswa['id_kelas'] ?></td>
+			<td><?= $siswa['kabupaten'] ?></td>
+			<td><?= $siswa['kecamatan'] ?></td>
 			<td><?= lamaujian($selisih) ?></td>
 			<td><?= $nilai['jml_benar'] ?></td>
 			<td><?= $nilai['jml_salah'] ?></td>
 			<td class='str'><?= $nilai['skor'] ?></td>
-			<td class='str'><?= $nilai['nilai_esai'] ?></td>
 			<td class='str'><?= $nilai['total'] ?></td>
 			<?php
 
@@ -118,20 +118,6 @@ Jumlah Soal: <?= $mapel['jml_soal'] ?> PG / <?= $mapel['jml_esai'] ?> ESAI<br />
 					<?php }
 				} else { ?>
 					<td>-</td>
-			<?php }
-			}
-			?>
-			<?php
-
-			$jawaban = unserialize($nilai['jawaban_esai']);
-			foreach ($jawaban as $key => $value) {
-
-				$soal = mysqli_fetch_array(mysqli_query($koneksi, "select * from soal where id_soal='$key' order by nomor ASC"));
-				$nomor = $soal['nomor'];
-				if ($soal) {
-					echo "<td>$value</td>";
-				} else { ?>
-					<td>Tidak diisi</td>
 			<?php }
 			}
 			?>
