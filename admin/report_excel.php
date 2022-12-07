@@ -34,11 +34,10 @@ if(!empty($_GET['wilayah_type'])){
 $file = "NILAI_" . $selected_wilayah['nama'] . "_" . $mapel['kode'];
 $file = str_replace(" ", "-", $file);
 $file = str_replace(":", "", $file);
-header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-// header("Content-type: application/octet-stream");
+header("Content-type: application/octet-stream");
 header("Pragma: no-cache");
 header("Expires: 0");
-header("Content-Disposition: attachment; filename=" . $file . ".xlsx"); ?>
+header("Content-Disposition: attachment; filename=" . $file . ".xls"); ?>
 
 Wilayah: <?= $selected_wilayah['nama'] ?><br />
 Kode Mapel: <?= $mapel['kode'] ?><br />
