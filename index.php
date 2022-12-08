@@ -221,45 +221,149 @@ $tglsekarang = time();
                                 </div><!-- /.box-header -->
                                 <div class='box-body'>
                                     <div id='pengumuman'>
-                                   <?php $logC = 0;
-                                        echo "<ul class='timeline'><br>";
-                                        $logQ = mysqli_query($koneksi, "SELECT * FROM pengumuman where type='eksternal' ORDER BY date DESC");
+                                        <?php $logC = 0;
+                                                echo "<ul class='timeline'><br>";
+                                                $logQ = mysqli_query($koneksi, "SELECT * FROM pengumuman where type='eksternal' ORDER BY date DESC");
 
-                                        while ($log = mysqli_fetch_array($logQ)) {
-                                            $logC++;
-                                            $user = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM pengawas WHERE id_pengawas='$log[user]'"));
-                                            if ($log['type'] == 'internal') {
-                                                $bg = 'bg-green';
-                                                $color = 'text-green';
-                                            } else {
-                                                $bg = 'bg-blue';
-                                                $color = 'text-blue';
-                                            }
-                                            echo "
-                                                        
-                                                        
-                                                        <!-- timeline time label -->
-                                                        
-                                                        <li><i class='fa fa-envelope $bg'></i>
-                                                        <div class='timeline-item'>
-                                                        <span class='time'> <i class='fa fa-calendar'></i> " . buat_tanggal('d-m-Y', $log['date']) . " <i class='fa fa-clock-o'></i> " . buat_tanggal('h:i', $log['date']) . "</span>
-                                                        <h3 class='timeline-header' style='background-color:#f9f0d5'><a class='$color' href='#'>$log[judul]</a> <small> $user[nama]</small>
-                                                        
-                                                        </h3>
-                                                        <div class='timeline-body'>
-                                                        " . ucfirst($log['text']) . "	
-                                                        </div>
-                                                        
-                                                        </div>
-                                                        </li>
-                                            
-                                                        
-                                                    ";
+                                                while ($log = mysqli_fetch_array($logQ)) {
+                                                    $logC++;
+                                                    $user = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM pengawas WHERE id_pengawas='$log[user]'"));
+                                                    if ($log['type'] == 'internal') {
+                                                        $bg = 'bg-green';
+                                                        $color = 'text-green';
+                                                    } else {
+                                                        $bg = 'bg-blue';
+                                                        $color = 'text-blue';
+                                                    }
+                                                    echo "
+                                                                
+                                                                
+                                                                <!-- timeline time label -->
+                                                                
+                                                                <li><i class='fa fa-envelope $bg'></i>
+                                                                <div class='timeline-item'>
+                                                                <span class='time'> <i class='fa fa-calendar'></i> " . buat_tanggal('d-m-Y', $log['date']) . " <i class='fa fa-clock-o'></i> " . buat_tanggal('h:i', $log['date']) . "</span>
+                                                                <h3 class='timeline-header' style='background-color:#f9f0d5'><a class='$color' href='#'>$log[judul]</a> <small> $user[nama]</small>
+                                                                
+                                                                </h3>
+                                                                <div class='timeline-body'>
+                                                                " . ucfirst($log['text']) . "	
+                                                                </div>
+                                                                
+                                                                </div>
+                                                                </li>
+                                                    
+                                                                
+                                                            ";
                                         }
                                         if ($logC == 0) {
                                             echo "<p class='text-center'>Tidak ada aktifitas.</p>";
                                         }
                                         echo "</ul>";?>
+                                    </div>
+                                    <div class="card-nilai">
+                                        <style>
+                                            body{
+                                                margin-top:20px;
+                                                background:#FAFAFA;
+                                            }
+                                            .order-card {
+                                                color: #fff;
+                                            }
+
+                                            .bg-c-blue {
+                                                background: linear-gradient(45deg,#4099ff,#73b4ff);
+                                            }
+
+                                            .bg-c-green {
+                                                background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+                                            }
+
+                                            .bg-c-yellow {
+                                                background: linear-gradient(45deg,#FFB64D,#ffcb80);
+                                            }
+
+                                            .bg-c-pink {
+                                                background: linear-gradient(45deg,#FF5370,#ff869a);
+                                            }
+
+
+                                            .card {
+                                                border-radius: 5px;
+                                                -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                                                box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                                                border: none;
+                                                margin-bottom: 30px;
+                                                -webkit-transition: all 0.3s ease-in-out;
+                                                transition: all 0.3s ease-in-out;
+                                            }
+
+                                            .card .card-block {
+                                                padding: 25px;
+                                            }
+
+                                            .order-card i {
+                                                font-size: 26px;
+                                            }
+
+                                            .f-left {
+                                                float: left;
+                                            }
+
+                                            .f-right {
+                                                float: right;
+                                            }
+                                        </style>
+                                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- <div class="col-md-4 col-xl-3">
+                                                    <div class="card bg-c-blue order-card">
+                                                        <div class="card-block">
+                                                            <h6 class="m-b-20">Orders Received</h6>
+                                                            <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
+                                                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-4 col-xl-3">
+                                                    <div class="card bg-c-green order-card">
+                                                        <div class="card-block">
+                                                            <h6 class="m-b-20">Orders Received</h6>
+                                                            <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
+                                                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-4 col-xl-3">
+                                                    <div class="card bg-c-yellow order-card">
+                                                        <div class="card-block">
+                                                            <h6 class="m-b-20">Orders Received</h6>
+                                                            <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
+                                                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                                <?php
+                                                    $hasilQ = mysqli_query($koneksi, "SELECT m.kode, n.skor, s.username FROM nilai n JOIN siswa s ON n.id_siswa = s.id_siswa JOIN mapel m ON n.id_mapel = m.id_mapel WHERE n.skor=0 AND s.id_siswa = $id_siswa");
+                                                    while ($hasil = mysqli_fetch_array($hasilQ)) {
+                                                        echo '
+                                                        <div class="col-md-4 col-xl-3">
+                                                            <div class="card bg-c-pink order-card">
+                                                                <div class="card-block">
+                                                                    <h6 class="m-b-20">Nilai ' . $hasil['kode'] .' Masih Belum Cukup</h6>
+                                                                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>Nilai: ' . $hasil['skor'] . '</span></h2>
+                                                                    <p class="m-b-0">Silahkan Hubungi Admin <a href="https://wa.me/6285157491192?text=' . $hasil['username'] . '-' . $hasil['kode'] . '"><stron>WA : 085157491192</stron></a> Untuk Mengulang</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>';
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
