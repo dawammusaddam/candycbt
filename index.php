@@ -310,18 +310,18 @@ $tglsekarang = time();
                                             -->
 
                                                 <?php
-                                                    $hasilQ = mysqli_query($koneksi, "SELECT m.kode, n.skor, s.username, s.provinsi FROM nilai n JOIN siswa s ON n.id_siswa = s.id_siswa JOIN mapel m ON n.id_mapel = m.id_mapel WHERE s.id_siswa = $id_siswa");
-                                                    while ($hasil = mysqli_fetch_array($hasilQ)) {      
-                                                        echo '
-                                                        <div class="col-md-4 col-xl-3">
-                                                            <div class="card ' . ($hasil['skor'] == 0 ? 'bg-c-pink' : 'bg-c-blue') . ' order-card">
-                                                                <div class="card-block">
-                                                                    <h6 class="m-b-20">Nilai ' . $hasil['kode'] .'</h6>
-                                                                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>Nilai: ' . $hasil['skor'] . '</span></h2>
-                                                                </div>
-                                                            </div>
-                                                        </div>';
-                                                    }
+                                                    // $hasilQ = mysqli_query($koneksi, "SELECT m.kode, n.skor, s.username, s.provinsi FROM nilai n JOIN siswa s ON n.id_siswa = s.id_siswa JOIN mapel m ON n.id_mapel = m.id_mapel WHERE s.id_siswa = $id_siswa");
+                                                    // while ($hasil = mysqli_fetch_array($hasilQ)) {      
+                                                    //     echo '
+                                                    //     <div class="col-md-4 col-xl-3">
+                                                    //         <div class="card ' . ($hasil['skor'] == 0 ? 'bg-c-pink' : 'bg-c-blue') . ' order-card">
+                                                    //             <div class="card-block">
+                                                    //                 <h6 class="m-b-20">Nilai ' . $hasil['kode'] .'</h6>
+                                                    //                 <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>Nilai: ' . $hasil['skor'] . '</span></h2>
+                                                    //             </div>
+                                                    //         </div>
+                                                    //     </div>';
+                                                    // }
                                                 ?>
                                             </div>
                                         </div>
