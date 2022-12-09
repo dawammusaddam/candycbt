@@ -220,47 +220,6 @@ $tglsekarang = time();
                                     <h3 class='box-title'><i class="fas fa-bullhorn    "></i> Pengumuman</h3>
                                 </div><!-- /.box-header -->
                                 <div class='box-body'>
-                                    <div id='pengumuman'>
-                                        <?php $logC = 0;
-                                                echo "<ul class='timeline'><br>";
-                                                $logQ = mysqli_query($koneksi, "SELECT * FROM pengumuman where type='eksternal' ORDER BY date DESC");
-
-                                                while ($log = mysqli_fetch_array($logQ)) {
-                                                    $logC++;
-                                                    $user = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM pengawas WHERE id_pengawas='$log[user]'"));
-                                                    if ($log['type'] == 'internal') {
-                                                        $bg = 'bg-green';
-                                                        $color = 'text-green';
-                                                    } else {
-                                                        $bg = 'bg-blue';
-                                                        $color = 'text-blue';
-                                                    }
-                                                    echo "
-                                                                
-                                                                
-                                                                <!-- timeline time label -->
-                                                                
-                                                                <li><i class='fa fa-envelope $bg'></i>
-                                                                <div class='timeline-item'>
-                                                                <span class='time'> <i class='fa fa-calendar'></i> " . buat_tanggal('d-m-Y', $log['date']) . " <i class='fa fa-clock-o'></i> " . buat_tanggal('h:i', $log['date']) . "</span>
-                                                                <h3 class='timeline-header' style='background-color:#f9f0d5'><a class='$color' href='#'>$log[judul]</a> <small> $user[nama]</small>
-                                                                
-                                                                </h3>
-                                                                <div class='timeline-body'>
-                                                                " . ucfirst($log['text']) . "	
-                                                                </div>
-                                                                
-                                                                </div>
-                                                                </li>
-                                                    
-                                                                
-                                                            ";
-                                        }
-                                        if ($logC == 0) {
-                                            echo "<p class='text-center'>Tidak ada aktifitas.</p>";
-                                        }
-                                        echo "</ul>";?>
-                                    </div>
                                     <div class="card-nilai">
                                         <style>
                                             body{
@@ -345,18 +304,20 @@ $tglsekarang = time();
                                                             <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
                                                         </div>
                                                     </div>
-                                                </div> -->
+                                                </div>
+                                                
+                                                <p class="m-b-0">Silahkan Hubungi Admin <a href="https://wa.me/6285157491192?text=' . $hasil['username'] . '-' . $hasil['kode'] . '-' . $hasil['provinsi'] . '"><stron>WA : 085157491192</stron></a> Untuk Mengulang</p> 
+                                            -->
 
                                                 <?php
-                                                    $hasilQ = mysqli_query($koneksi, "SELECT m.kode, n.skor, s.username FROM nilai n JOIN siswa s ON n.id_siswa = s.id_siswa JOIN mapel m ON n.id_mapel = m.id_mapel WHERE n.skor=0 AND s.id_siswa = $id_siswa");
-                                                    while ($hasil = mysqli_fetch_array($hasilQ)) {
+                                                    $hasilQ = mysqli_query($koneksi, "SELECT m.kode, n.skor, s.username, s.provinsi FROM nilai n JOIN siswa s ON n.id_siswa = s.id_siswa JOIN mapel m ON n.id_mapel = m.id_mapel WHERE s.id_siswa = $id_siswa");
+                                                    while ($hasil = mysqli_fetch_array($hasilQ)) {      
                                                         echo '
                                                         <div class="col-md-4 col-xl-3">
-                                                            <div class="card bg-c-pink order-card">
+                                                            <div class="card ' . ($hasil['skor'] == 0 ? 'bg-c-pink' : 'bg-c-blue') . ' order-card">
                                                                 <div class="card-block">
-                                                                    <h6 class="m-b-20">Nilai ' . $hasil['kode'] .' Masih Belum Cukup</h6>
+                                                                    <h6 class="m-b-20">Nilai ' . $hasil['kode'] .'</h6>
                                                                     <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>Nilai: ' . $hasil['skor'] . '</span></h2>
-                                                                    <p class="m-b-0">Silahkan Hubungi Admin <a href="https://wa.me/6285157491192?text=' . $hasil['username'] . '-' . $hasil['kode'] . '"><stron>WA : 085157491192</stron></a> Untuk Mengulang</p>
                                                                 </div>
                                                             </div>
                                                         </div>';
@@ -364,6 +325,47 @@ $tglsekarang = time();
                                                 ?>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id='pengumuman'>
+                                        <?php $logC = 0;
+                                                echo "<ul class='timeline'><br>";
+                                                $logQ = mysqli_query($koneksi, "SELECT * FROM pengumuman where type='eksternal' ORDER BY date DESC");
+
+                                                while ($log = mysqli_fetch_array($logQ)) {
+                                                    $logC++;
+                                                    $user = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM pengawas WHERE id_pengawas='$log[user]'"));
+                                                    if ($log['type'] == 'internal') {
+                                                        $bg = 'bg-green';
+                                                        $color = 'text-green';
+                                                    } else {
+                                                        $bg = 'bg-blue';
+                                                        $color = 'text-blue';
+                                                    }
+                                                    echo "
+                                                                
+                                                                
+                                                                <!-- timeline time label -->
+                                                                
+                                                                <li><i class='fa fa-envelope $bg'></i>
+                                                                <div class='timeline-item'>
+                                                                <span class='time'> <i class='fa fa-calendar'></i> " . buat_tanggal('d-m-Y', $log['date']) . " <i class='fa fa-clock-o'></i> " . buat_tanggal('h:i', $log['date']) . "</span>
+                                                                <h3 class='timeline-header' style='background-color:#f9f0d5'><a class='$color' href='#'>$log[judul]</a> <small> $user[nama]</small>
+                                                                
+                                                                </h3>
+                                                                <div class='timeline-body'>
+                                                                " . ucfirst($log['text']) . "	
+                                                                </div>
+                                                                
+                                                                </div>
+                                                                </li>
+                                                    
+                                                                
+                                                            ";
+                                        }
+                                        if ($logC == 0) {
+                                            echo "<p class='text-center'>Tidak ada aktifitas.</p>";
+                                        }
+                                        echo "</ul>";?>
                                     </div>
                                 </div>
                             </div>
