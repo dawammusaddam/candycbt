@@ -41,7 +41,7 @@ header("Content-Disposition: attachment; filename=" . $file . ".xls"); ?>
 
 Wilayah: <?= $selected_wilayah['nama'] ?><br />
 Kode Mapel: <?= $mapel['kode'] ?><br />
-Tanggal Ujian: <?= buat_tanggal('D, d M Y - H:i', $mapel['tgl_ujian']) ?><br />
+Tanggal Dicetak: <?= buat_tanggal('D, d M Y - H:i', $mapel['tgl_ujian']) ?><br />
 Jumlah Soal: <?= $mapel['jml_soal'] ?> PG<br />
 
 <table border='1'>
